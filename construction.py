@@ -17,7 +17,7 @@ def portalen():
 
 def stolen():
 
-    aut.moveTo(925, 240) #gå till stol platsen 
+    aut.moveTo(775, 195) #gå till stol platsen 
     time.sleep(0.2)
     aut.click()
     time.sleep(4)
@@ -27,10 +27,10 @@ def bygg(): #11 gånger per inv
 
     for x in range (2):
 
-        aut.moveTo(836, 206)
+        aut.moveTo(839, 176)
         time.sleep(0.2)
         aut.click(button="right")
-        aut.moveTo(836, 266)
+        aut.moveTo(839, 236)
         time.sleep(0.2)
         aut.click()
         time.sleep(0.7)
@@ -38,10 +38,10 @@ def bygg(): #11 gånger per inv
         time.sleep(1)
 
 
-        aut.moveTo(837, 204)
+        aut.moveTo(839, 176)
         time.sleep(0.2)
         aut.click(button="right")
-        aut.moveTo(836, 276)
+        aut.moveTo(839, 252)
         time.sleep(0.2)
         aut.click()
         time.sleep(0.7)
@@ -49,7 +49,7 @@ def bygg(): #11 gånger per inv
         time.sleep(1)
 
 def tbx():
-    aut.moveTo(764, 174)
+    aut.moveTo(916, 208)
     time.sleep(0.2)
     aut.click()
     time.sleep(5)
@@ -81,10 +81,11 @@ def hittaphilas():
             min_val, max_val, min_loc, max_loc = cv.minMaxLoc(result)
             print("max val =", max_val)
             if max_val >= 0.4:
+                
                 # Convert template coordinates to screen coordinates
                 x = max_loc[0] + roi_top_left[0]
                 y = max_loc[1] + roi_top_left[1]
-                
+                print(f"found the fucker at Max Value: {max_val}, Location: ({max_loc[0] + roi_top_left[0]}, {max_loc[1] + roi_top_left[1]})")
                 aut.moveTo(x + 5 , y + 10)
                 aut.click()
                 time.sleep(8)
