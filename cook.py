@@ -39,9 +39,8 @@ def loggain():
 
 def koka():
     aut.moveTo(730, 207)  #banker
-    time.sleep(0.2)
     aut.click()
-    time.sleep(0.5)
+    time.sleep(0.7)
 
     aut.moveTo(774, 80)  #shark tabben
     aut.click()
