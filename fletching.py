@@ -213,37 +213,60 @@ def screen1cook():
 
 def screen2cook():
 
-    aut.moveTo(2657, 225)  #banker
+    aut.moveTo(2080, 223)  #banker
     time.sleep(0.2)
     aut.click()
     time.sleep(0.7)
 
-    aut.moveTo(2657, 80)  #shark tabben
+    aut.moveTo(2083, 87)  #shark tabben
     aut.click()
     time.sleep(0.2)
 
-    aut.moveTo(2942, 335) #banka allt 
+    aut.moveTo(2370, 341) #banka allt 
     time.sleep(0.2)
     aut.click()
     time.sleep(0.2)
 
-    aut.moveTo(2583, 118) #ta sharks 
+    aut.moveTo(2011, 123) #ta sharks 
     aut.click()
     time.sleep(0.2)
     aut.press("esc")
 
-    aut.moveTo(2755, 102) #elden 
+    aut.moveTo(2184, 132) #elden 
     time.sleep(0.4)
     aut.click()
     time.sleep(1)
     aut.press("space")
 
-    time.sleep(61)
+    time.sleep(59)
+
+
+
+def screen345keepalive():
+    aut.moveTo(3272, 215) #3
+    time.sleep(0.4)
+    aut.click()
+
+    aut.moveTo(2502, 718) #4
+    time.sleep(0.4)
+    aut.click()
+
+    aut.moveTo(3274, 715) #5
+    time.sleep(0.4)
+    aut.click()
+
+
+
+
+
 
 while True:
+    
     screen1cook()
     screen2cook()
+    screen345keepalive()
     
+        
 
 
 
