@@ -243,7 +243,7 @@ def screen2cook():
 
 
 def screen345keepalive():
-    for i in range (18):
+    for i in range (22):
         aut.moveTo(3410, 338) #3
         aut.click()
         time.sleep(0.1)
