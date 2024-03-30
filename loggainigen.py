@@ -15,7 +15,7 @@ aut.hotkey('altright','2')
 aut.write('live.se', interval=0.25)
 aut.press("tab")
 
-aut.write('Gandalfdentredje333', interval=0.25)
+aut.write('', interval=0.25)
 
 aut.press("enter")
 

@@ -238,22 +238,28 @@ def screen2cook():
     time.sleep(1)
     aut.press("space")
 
-    time.sleep(59)
+    
 
 
 
 def screen345keepalive():
-    aut.moveTo(3272, 215) #3
-    time.sleep(0.4)
-    aut.click()
+    for i in range (18):
+        aut.moveTo(3410, 338) #3
+        aut.click()
+        time.sleep(0.1)
+        aut.click()
 
-    aut.moveTo(2502, 718) #4
-    time.sleep(0.4)
-    aut.click()
+        aut.moveTo(2636, 840) #4
+        aut.click()
+        time.sleep(0.1)
+        aut.click()
 
-    aut.moveTo(3274, 715) #5
-    time.sleep(0.4)
-    aut.click()
+        aut.moveTo(3410, 841) #5
+        aut.click()
+        time.sleep(0.1)
+        aut.click()
+
+        time.sleep(1.5)
 
 
 
