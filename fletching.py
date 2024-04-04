@@ -4,83 +4,86 @@ import cv2 as cv
 import time 
 import win32 
 
-def screen1():
+def screen1fletch():
 
-    aut.moveTo(940, 204)  #banker
+    aut.moveTo(367, 204)  #banker
     time.sleep(0.2)
     aut.click()
     time.sleep(0.5)
 
-    aut.moveTo(695, 82)  #fletch tabben
+    aut.moveTo(122, 82)  #fletch tabben
     time.sleep(0.2)
     aut.click()
     time.sleep(0.2)
 
-    aut.moveTo(1021, 335) #banka allt 
+    aut.moveTo(449, 335) #banka allt 
     time.sleep(0.2)
     aut.click()
     time.sleep(0.2)
 
-    aut.moveTo(664, 118) #ta knife 
+    aut.moveTo(91, 118) #ta knife 
     aut.click()
     time.sleep(0.2)
 
-    aut.moveTo(712, 118) #ta logs  
+    aut.moveTo(140, 118) #ta logs  
     aut.click()
     time.sleep(0.2)
     aut.press("esc")
 
 
-    aut.moveTo(1155, 260) #knife inventory 
+    aut.moveTo(583, 260) #knife inventory 
     time.sleep(0.2)
     aut.click()
 
-    aut.moveTo(1200, 260) #logs  
+    aut.moveTo(624, 260) #logs  
     time.sleep(0.2)
     aut.click()
     time.sleep(1)
     aut.press("space")
 
+    #time.sleep(49)
 
 
-def screen2():
 
-    aut.moveTo(2861, 191)  #banker
+
+def screen2fletch():
+
+    aut.moveTo(1139, 200)  #banker
     time.sleep(0.2)
     aut.click()
     time.sleep(0.5)
 
-    aut.moveTo(2616, 80)  #fletch tabben
+    aut.moveTo(895, 80)  #fletch tabben
     time.sleep(0.2)
     aut.click()
     time.sleep(0.2)
 
-    aut.moveTo(2942, 335) #banka allt 
+    aut.moveTo(1221, 339) #banka allt 
     time.sleep(0.2)
     aut.click()
     time.sleep(0.2)
 
-    aut.moveTo(2586, 120) #ta knife 
+    aut.moveTo(866, 120) #ta knife 
     aut.click()
     time.sleep(0.2)
 
-    aut.moveTo(2633, 120) #ta logs  
+    aut.moveTo(914, 120) #ta logs  
     aut.click()
     time.sleep(0.2)
     aut.press("esc")
 
 
-    aut.moveTo(3075, 252) #knife inventory 
+    aut.moveTo(1355, 252) #knife inventory 
     time.sleep(0.2)
     aut.click()
 
-    aut.moveTo(3116, 252) #logs  
+    aut.moveTo(1397, 252) #logs  
     time.sleep(0.2)
     aut.click()
     time.sleep(1)
     aut.press("space")
 
-    time.sleep(45)
+    
 
 
 def screen3mining ():
@@ -151,7 +154,7 @@ def screen4smithing():
     time.sleep(0.5)
     aut.click()
 
-    screen1()
+    screen1fletch()
 
     time.sleep(20)
 
@@ -243,34 +246,38 @@ def screen2cook():
 
 
 def screen345keepalive():
-    for i in range (22):
-        aut.moveTo(3410, 338) #3
+    for i in range (13):
+        aut.moveTo(716, 839) #3
         aut.click()
-        time.sleep(0.1)
+        time.sleep(0.2)
+        aut.click()
+        
+        time.sleep(0.6)
+
+        aut.moveTo(1491, 840) #4
+        aut.click()
+        time.sleep(0.2)
+        aut.click()
+        
+        time.sleep(0.6)
+
+        aut.moveTo(2638, 336) #5
+        aut.click()
+        time.sleep(0.2)
         aut.click()
 
-        aut.moveTo(2636, 840) #4
-        aut.click()
-        time.sleep(0.1)
-        aut.click()
-
-        aut.moveTo(3410, 841) #5
-        aut.click()
-        time.sleep(0.1)
-        aut.click()
-
-        time.sleep(1.5)
+        time.sleep(0.7)
 
 
-
+ 
 
 
 
 while True:
-    
-    screen1cook()
-    screen2cook()
+    screen1fletch()
+    screen2fletch()
     screen345keepalive()
+    
     
         
 
