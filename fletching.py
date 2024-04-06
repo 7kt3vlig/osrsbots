@@ -245,38 +245,129 @@ def screen2cook():
 
 
 
-def screen345keepalive():
-    for i in range (13):
+def screen345678alch():
+    for i in range (12):
         aut.moveTo(716, 839) #3
         aut.click()
         time.sleep(0.2)
         aut.click()
-        
-        time.sleep(0.6)
 
         aut.moveTo(1491, 840) #4
         aut.click()
         time.sleep(0.2)
         aut.click()
+        aut.click()
         
-        time.sleep(0.6)
-
+        
         aut.moveTo(2638, 336) #5
         aut.click()
         time.sleep(0.2)
         aut.click()
+        aut.click()
 
-        time.sleep(0.7)
+        
+
+        aut.moveTo(2638, 840) #6
+        aut.click()
+        time.sleep(0.2)
+        aut.click()
+        aut.click()
+
+        aut.moveTo(3410, 840) #7
+        aut.click()
+        time.sleep(0.2)
+        aut.click()
+        aut.click()
+
+        aut.moveTo(3410, 336 ) #8
+        aut.click()
+        time.sleep(0.2)
+        aut.click()
+        aut.click()
 
 
- 
+def screen34():
+    for i in range (13):
+        aut.moveTo(716, 839) #3
+        aut.click()
+        time.sleep(0.2)
+        aut.click()
+        aut.click()
+
+        aut.moveTo(1491, 840) #4
+        aut.click()
+        time.sleep(0.2)
+        aut.click()
+        aut.click()
+
+        time.sleep(1.8)
 
 
+
+        
+
+
+def screen5alch():
+    aut.moveTo(2638, 336) #5
+    aut.click()
+    time.sleep(0.2)
+    aut.click()
+    aut.click()
+
+    time.sleep(0.7)
+
+
+
+def screen1craft():
+
+    aut.moveTo(664, 118) #ta ammo mold 
+    time.sleep(0.2)
+    aut.click()
+    time.sleep(0.2)
+    aut.moveTo(713, 118) #ta steel bars  
+    time.sleep(0.2)
+    aut.click()
+    time.sleep(0.4)
+    aut.press("esc")
+
+    aut.moveTo(981, 139) #furnace
+    time.sleep(0.2)
+    aut.click()
+    time.sleep(5)
+    aut.moveTo(321, 311) #bracelet 
+    time.sleep(0.2)
+    aut.click()
+    aut.press("space")
+    time.sleep(160)
+
+    aut.moveTo(645, 284)
+    aut.click()
+    time.sleep(7)
+
+    aut.moveTo(1021, 335) #banka allt 
+    time.sleep(0.5)
+    aut.click()
+    time.sleep(1)
+
+def screen678keepalive():
+    aut.moveTo(3261, 437)
+    aut.click()
+    aut.click()
+
+    aut.moveTo(3277, 839)
+    aut.click()
+    aut.click()
+
+    aut.moveTo(2502, 909)
+    aut.click()
+    aut.click()
 
 while True:
     screen1fletch()
     screen2fletch()
-    screen345keepalive()
+    #screen34()
+    screen345678alch()
+    
     
     
         
