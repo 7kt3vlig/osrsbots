@@ -57,15 +57,15 @@ def detect_coin_pouches():
 
 
 def detect_hp():
+        
     print("checking hp..")
     # Define the region of interest (ROI) coordinates
     roi_top_left = (525, 83)
     roi_bottom_right = (543, 95)
-
-    # Take a screenshot of the specified region
+    
     screenshot = aut.screenshot(region=(roi_top_left[0], roi_top_left[1], 
-                                         roi_bottom_right[0] - roi_top_left[0], 
-                                         roi_bottom_right[1] - roi_top_left[1]))
+                                        roi_bottom_right[0] - roi_top_left[0], 
+                                        roi_bottom_right[1] - roi_top_left[1]))
 
     # Convert the screenshot to OpenCV format (BGR)
     screenshot_cv = cv.cvtColor(np.array(screenshot), cv.COLOR_RGB2BGR)
@@ -75,21 +75,19 @@ def detect_hp():
 
     # Load the template image
     template = cv.imread('hp.png', cv.IMREAD_GRAYSCALE)
+    blur = cv.blur(grayscale_img, (3,3))
+    blur1 = cv.blur(template, (3,3))
+    canny = cv.Canny(blur, 125, 175)
 
-    # Threshold the template image to create a mask
-    _, mask = cv.threshold(template, 220, 255, cv.THRESH_BINARY)
+    canny1 = cv.Canny(blur1, 125, 175)
 
-    # Find contours in the mask
-    contours, _ = cv.findContours(mask, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
-
-    # Draw contours on the template image (for visualization)
-    template_with_contours = cv.drawContours(cv.cvtColor(template, cv.COLOR_GRAY2BGR), contours, -1, (0, 255, 0), 2)
-
+    # cv.imshow("1", canny)
+    # cv.imshow("2", canny1)
     # Perform template matching
-    result = cv.matchTemplate(grayscale_img, template, cv.TM_CCOEFF_NORMED)
+    result = cv.matchTemplate(canny, canny1, cv.TM_CCOEFF_NORMED)
 
     # Define a threshold for the match
-    threshold = 0.8
+    threshold = 0.4
 
     # Get the location of the best match
     _, max_val, _, _ = cv.minMaxLoc(result)
@@ -107,23 +105,64 @@ def detect_hp():
         aut.click()
         
 
-
-def kollahp():
-    # Load the image containing the number "73"
-    image = Image.open('hp.png')
-
-    # Perform OCR using pytesseract
-    ocr_result = pytesseract.image_to_string(image, config='--psm 6')
-
-    # Check if "73" is found in the OCR result
-    if '73' in ocr_result:
-        print("Number 73 found:", ocr_result)
-    else:
-        print("Number 73 not found in the image.")
-
-kollahp()
+while True:
+    detect_coin_pouches()
+    detect_hp()
+    ardyknight()
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# print("checking hp..")
+# # Define the region of interest (ROI) coordinates
+# roi_top_left = (525, 83)
+# roi_bottom_right = (543, 95)
+ 
+# screenshot = aut.screenshot(region=(roi_top_left[0], roi_top_left[1], 
+#                                     roi_bottom_right[0] - roi_top_left[0], 
+#                                     roi_bottom_right[1] - roi_top_left[1]))
+
+# # Convert the screenshot to OpenCV format (BGR)
+# screenshot_cv = cv.cvtColor(np.array(screenshot), cv.COLOR_RGB2BGR)
+
+# # Convert the screenshot to grayscale
+# grayscale_img = cv.cvtColor(screenshot_cv, cv.COLOR_BGR2GRAY)
+
+# # Load the template image
+# template = cv.imread('hp.png', cv.IMREAD_GRAYSCALE)
+# blur = cv.blur(grayscale_img, (3,3))
+# blur1 = cv.blur(template, (3,3))
+# canny = cv.Canny(blur, 125, 175)
+
+# canny1 = cv.Canny(blur1, 125, 175)
+
+# # cv.imshow("1", canny)
+# # cv.imshow("2", canny1)
+# # Perform template matching
+# result = cv.matchTemplate(canny, canny1, cv.TM_CCOEFF_NORMED)
+
+# # Define a threshold for the match
+# threshold = 0.4
+
+# # Get the location of the best match
+# _, max_val, _, _ = cv.minMaxLoc(result)
+# print(max_val)
+# cv.waitKey(0)
+# cv.destroyAllWindows()
