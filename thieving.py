@@ -11,10 +11,10 @@ def ta():
     
 
 
-    aut.moveTo(925, 194) #thieving platsen 
+    aut.moveTo(343, 194) #thieving platsen 
     time.sleep(0.6)
     aut.click()
-    aut.moveTo(1155, 253) #inventory 
+    aut.moveTo(583, 259) #inventory 
     aut.keyDown("shift")
     time.sleep(2)
     aut.click()
@@ -98,4 +98,5 @@ def hittapaladin():
             except Exception as e:
                 print("Error while removing file:", e)
 
-hittapaladin()
+
+

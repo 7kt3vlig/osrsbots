@@ -6,38 +6,38 @@ import win32
 
 while True:
 
-    aut.moveTo(664, 120) #bronze bar 
+    aut.moveTo(138, 128) #hammer   
     aut.click()
-    time.sleep(0.4)
+    time.sleep(0.2)
 
-    aut.moveTo(712, 120) #hammer 
-    time.sleep(0.5)
+    aut.moveTo(95, 126) #bar  
+    time.sleep(0.2)
     aut.click()
-    time.sleep(1)
+    
 
     aut.press("esc")
 
-    aut.moveTo(891, 358) #anvil 
-    time.sleep(0.5)
-    aut.click()
-    time.sleep(8)
-
-
-    aut.moveTo(778, 88) # chainbodys 
-    time.sleep(0.5)
-    aut.click()
-    time.sleep(40)
-
-
-    aut.moveTo(814, 95) # banken 
-    time.sleep(0.5)
-    aut.click()
-    time.sleep(10)
-
-    aut.moveTo(1022, 336) # banka allt 
-    time.sleep(0.5)
+    aut.moveTo(315, 361) #anvil 
+    time.sleep(0.2)
     aut.click()
     time.sleep(7)
+
+
+    aut.moveTo(205, 259) # chainbodys 
+    time.sleep(0.2)
+    aut.click()
+    time.sleep(15)
+
+
+    aut.moveTo(241, 98) # banken 
+    time.sleep(0.2)
+    aut.click()
+    time.sleep(7)
+
+    aut.moveTo(450, 340) # banka allt 
+    time.sleep(0.2)
+    aut.click()
+    time.sleep(0.4)
 
 
 

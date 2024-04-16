@@ -246,7 +246,7 @@ def screen2cook():
 
 
 def screen2345678alch():
-    for i in range (12):
+    for i in range (8):
 
         aut.moveTo(1490, 336) #3
         aut.click()
@@ -372,10 +372,9 @@ def screen678keepalive():
 
 while True:
     screen1fletch()
-    time.sleep(22)
     #screen2fletch()
     #screen34()
-    #screen2345678alch()
+    screen2345678alch()
     
     
     
