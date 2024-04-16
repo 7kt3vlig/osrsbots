@@ -104,11 +104,127 @@ def detect_hp():
         time.sleep(0.2)
         aut.click()
         
+        
+def non_max_suppression(boxes, overlap_threshold):
+    if len(boxes) == 0:
+        return []
 
-while True:
-    detect_coin_pouches()
-    detect_hp()
-    ardyknight()
+    # Sort the bounding boxes by their confidence score (match value)
+    boxes = sorted(boxes, key=lambda x: x[2], reverse=True)
+
+    # Initialize the list of picked bounding boxes
+    picked_boxes = []
+
+    # Loop over the sorted bounding boxes
+    while len(boxes) > 0:
+        # Get the bounding box with the highest confidence score
+        best_box = boxes.pop(0)
+        picked_boxes.append(best_box)
+
+        # Calculate the intersection over union (IoU) with the other bounding boxes
+        for box in boxes[:]:
+            x1 = max(best_box[0], box[0])
+            y1 = max(best_box[1], box[1])
+            x2 = min(best_box[0] + best_box[2], box[0] + box[2])
+            y2 = min(best_box[1] + best_box[3], box[1] + box[3])
+
+            intersection_area = max(0, x2 - x1 + 1) * max(0, y2 - y1 + 1)
+            area1 = best_box[2] * best_box[3]
+            area2 = box[2] * box[3]
+            iou = intersection_area / float(area1 + area2 - intersection_area)
+
+            # Remove the bounding box if the IoU is greater than the overlap threshold
+            if iou > overlap_threshold:
+                boxes.remove(box)
+
+    return picked_boxes
+
+roi_top_left = (553, 377)
+roi_bottom_right = (737, 489)
+
+screenshot = aut.screenshot(region=(roi_top_left[0], roi_top_left[1], 
+                                     roi_bottom_right[0] - roi_top_left[0], 
+                                     roi_bottom_right[1] - roi_top_left[1]))
+
+screenshot_cv1 = cv.cvtColor(np.array(screenshot), cv.COLOR_RGB2GRAY)
+template1 = cv.imread('jugofwine.png', cv.IMREAD_GRAYSCALE)
+
+result = cv.matchTemplate(screenshot_cv1, template1, cv.TM_CCOEFF_NORMED)
+
+threshold = 0.4
+
+locations = np.where(result >= threshold)
+
+# Adjust the match locations to the actual screen coordinates
+match_locations = zip(*locations[::-1])
+adjusted_locations = [(pt[0] + roi_top_left[0], pt[1] + roi_top_left[1]) for pt in match_locations]
+
+# Prepare bounding boxes for non-maximum suppression
+boxes = []
+for pt in adjusted_locations:
+    x, y = pt
+    w, h = template1.shape[::-1]  # Width and height of the template
+    boxes.append((x, y, w, h))
+
+# Apply non-maximum suppression to remove redundant detections
+picked_boxes = non_max_suppression(boxes, overlap_threshold=0.5)
+
+# Print the adjusted locations and corresponding match values
+for box in picked_boxes:
+    x, y, _, _ = box
+    print("Match found at:", (x, y))
+    print("Match value:", result[y - roi_top_left[1], x - roi_top_left[0]])
+
+# roi_top_left = (553, 377)
+# roi_bottom_right = (737, 489)
+
+# screenshot = aut.screenshot(region=(roi_top_left[0], roi_top_left[1], 
+#                                      roi_bottom_right[0] - roi_top_left[0], 
+#                                      roi_bottom_right[1] - roi_top_left[1]))
+
+# screenshot_cv1 = cv.cvtColor(np.array(screenshot), cv.COLOR_RGB2GRAY)
+# template1 = cv.imread('jugofwine.png', cv.IMREAD_GRAYSCALE)
+
+
+# result = cv.matchTemplate(screenshot_cv1, template1, cv.TM_CCOEFF_NORMED)
+
+# threshold = 0.45
+
+# locations = np.where(result >= threshold)
+
+# # Adjust the match locations to the actual screen coordinates
+# match_locations = zip(*locations[::-1])
+# adjusted_locations = [(pt[0] + roi_top_left[0], pt[1] + roi_top_left[1]) for pt in match_locations]
+
+# # Print the adjusted locations and corresponding match values
+# for pt in adjusted_locations:
+#     print("Match found at:", pt)
+#     print("Match value:", result[pt[1] - roi_top_left[1], pt[0] - roi_top_left[0]])
+# Get the location of the best match
+#_, max_val, _, _ = cv.minMaxLoc(result)
+
+#     # Check if the maximum match value is above the threshold
+# if max_val >= threshold:
+#     print("Match found! hittade en jar")
+#     print("Max value:", max_val)
+        
+# else:
+#     print("No match found, now we gotta do something")
+#     print("Max value:", max_val)
+    
+
+
+# cv.imshow("test", screenshot_cv1)
+# cv.waitKey(0)
+# cv.destroyAllWindows()
+
+
+
+
+# while True:
+#     detect_coin_pouches()
+#     detect_hp()
+#     ardyknight()
 
 
 
@@ -116,8 +232,16 @@ while True:
 
 
 
-
-
+# göra en funktion som kollar jugs of wine i inventoryn och 
+# dricker en. 
+# roi = 553 377 - 737 489 
+# 
+#
+#
+#
+#
+#
+#
 
 
 
