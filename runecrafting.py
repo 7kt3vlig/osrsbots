@@ -6,7 +6,7 @@ from PIL import ImageGrab, Image
 import os 
 
 def taenergy():
-    aut.moveTo(936, 89) #energy tabben
+    aut.moveTo(856, 89) #energy tabben
     time.sleep(0.2)
     aut.click()
     time.sleep(0.2)

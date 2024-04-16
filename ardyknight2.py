@@ -93,7 +93,7 @@ def detect_hp():
         detect_jugs_and_drink()
 
 def detect_jugs_and_drink():
-    roi_top_left = (553, 377)
+    roi_top_left = (553, 310)
     roi_bottom_right = (737, 489)
 
     # Take a screenshot of the region where jugs are expected to be
@@ -141,8 +141,9 @@ def detect_jugs_and_drink():
         aut.click(x_center, y_center)
         print("Clicked at:", (x_center, y_center))
         time.sleep(0.6)
-        aut.press("shift")
+        aut.keyDown("shift")
         aut.click()
+        aut.keyUp("shift")
     else:
         print("No matches found.")
 
@@ -180,7 +181,146 @@ def non_max_suppression(boxes, overlap_threshold):
 
     return picked_boxes
 
-while True:
-    detect_coin_pouches()
-    detect_hp()
-    ardyknight()
+# Define the region coordinates
+x1, y1 = 8, 31
+x2, y2 = 520, 366
+
+# Take a screenshot of the specified region
+screenshot = aut.screenshot(region=(x1, y1, x2 - x1, y2 - y1))
+
+# Convert the screenshot to OpenCV format (BGR)
+screenshot_cv = np.array(screenshot)
+
+# Convert BGR to HSV
+hsv = cv.cvtColor(screenshot_cv, cv.COLOR_RGB2HSV)
+
+# Define lower and upper bounds for yellow color
+lower_yellow = np.array([20, 100, 100])
+upper_yellow = np.array([40, 255, 255])
+
+# Threshold the HSV image to get only yellow colors
+mask = cv.inRange(hsv, lower_yellow, upper_yellow)
+
+# Apply Canny edge detection
+edges = cv.Canny(mask, 30, 150)
+
+# Find contours in the edge-detected image
+contours, _ = cv.findContours(edges, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
+
+# Draw contours on the screenshot image
+screenshot_with_contours = screenshot_cv.copy()
+cv.drawContours(screenshot_with_contours, contours, -1, (0, 255, 0), 2)
+
+# Display the screenshot image with the contours
+cv.imshow('Screenshot with Contours', screenshot_with_contours)
+cv.waitKey(0)
+cv.destroyAllWindows()
+# print("Restocking and detecting..")
+
+# Restock
+# print("Restocking..")
+
+
+# aut.moveTo(680, 210)
+# aut.click()
+# time.sleep(0.2)
+# aut.moveTo(605, 300)
+# aut.click()
+# time.sleep(4)
+# aut.moveTo(260, 240)
+# aut.scroll(-5000)   # scroll up 10 "clicks"
+
+
+
+# aut.moveTo(172, 273)
+# aut.click()
+# time.sleep(4)
+
+
+# aut.moveTo(140, 127)
+# aut.click()
+# time.sleep(0.6)
+
+# aut.moveTo(583, 260)
+# aut.click()
+
+# aut.moveTo(626, 260)
+# aut.click()
+
+# aut.press("esc")
+
+
+# aut.moveTo(750, 215)
+# aut.click()
+# time.sleep(0.2)
+# aut.moveTo(647, 341)
+# aut.click()
+# time.sleep(4)
+
+
+# aut.moveTo(650, 215) #tp till ardy 
+# aut.click()
+
+
+# print("Detecting the item..")
+# template = cv.imread('bankikon.png', cv.IMREAD_GRAYSCALE)
+# template_height, template_width = template.shape
+
+# roi_top_left = (577, 77)
+# roi_bottom_right = (612, 120)
+# screenshot = aut.screenshot(region=(roi_top_left[0], roi_top_left[1], 
+#                                     roi_bottom_right[0] - roi_top_left[0], 
+#                                     roi_bottom_right[1] - roi_top_left[1]))
+
+# screenshot_np = np.array(screenshot)
+
+# # Apply Gaussian blur to the screenshot
+# screenshot_blurred = cv.GaussianBlur(screenshot_np, (7, 7), 0)
+
+# # Convert the blurred screenshot to grayscale
+# screenshot_gray = cv.cvtColor(screenshot_blurred, cv.COLOR_RGB2GRAY)
+
+# # Apply Gaussian blur to the template
+# template_blurred = cv.GaussianBlur(template, (7, 7), 0)
+
+# # Convert the blurred template to grayscale
+# template_gray = cv.cvtColor(template_blurred, cv.COLOR_GRAY2BGR)
+
+# # Convert both the screenshot and template to Canny edges
+# screenshot_edges = cv.Canny(screenshot_gray, 125, 175)
+# template_edges = cv.Canny(template_gray, 125, 175)
+# cv.imshow("1", screenshot_edges)
+# cv.imshow("2", template_edges )
+# cv.waitKey(0)
+# cv.destroyAllWindows()
+# # Perform template matching
+# result = cv.matchTemplate(screenshot_edges, template_edges, cv.TM_CCOEFF_NORMED)
+
+# # Find the location of the maximum value
+# min_val, max_val, min_loc, max_loc = cv.minMaxLoc(result)
+
+# # Convert the max_loc to the actual screen location
+# max_loc_screen = (max_loc[0] + roi_top_left[0], max_loc[1] + roi_top_left[1])
+
+# # Print the maximum value and its screen location
+# print("Max value:", max_val)
+# print("Max location (on screen):", max_loc_screen)
+
+# # Move the mouse to the center of the detected item and click
+# item_center_x = max_loc_screen[0] + template_width // 2
+# item_center_y = max_loc_screen[1] + template_height // 2
+# aut.moveTo(item_center_x, item_center_y)
+# aut.click()
+
+
+# while True:
+#     detect_coin_pouches()
+#     detect_hp()
+#     ardyknight()
+
+
+
+
+
+
+
