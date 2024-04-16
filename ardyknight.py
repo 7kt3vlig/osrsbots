@@ -6,7 +6,7 @@ from PIL import ImageGrab, Image
 import os
 import pytesseract
 from PIL import Image
-
+import random 
 
 def ardyknight():
     print("Stealing..")
@@ -100,12 +100,11 @@ def detect_hp():
     else:
         print("No match found, going to eat..")
         print("Max value:", max_val)
-        aut.moveTo(582, 333)  
-        time.sleep(0.2)
-        aut.click()
+        print("detecting jugs in inventory..")
+        detect_jugs_and_drink()
         
         
-def non_max_suppression(boxes, overlap_threshold):
+def detect_jugs_and_drink(boxes, overlap_threshold):
     if len(boxes) == 0:
         return []
 
@@ -167,7 +166,7 @@ for pt in adjusted_locations:
     boxes.append((x, y, w, h))
 
 # Apply non-maximum suppression to remove redundant detections
-picked_boxes = non_max_suppression(boxes, overlap_threshold=0.5)
+picked_boxes = detect_jugs_and_drink(boxes, overlap_threshold=0.5)
 
 # Print the adjusted locations and corresponding match values
 for box in picked_boxes:
@@ -175,6 +174,19 @@ for box in picked_boxes:
     print("Match found at:", (x, y))
     print("Match value:", result[y - roi_top_left[1], x - roi_top_left[0]])
 
+
+# Randomly select one of the remaining bounding boxes and click on its center
+if picked_boxes:
+    # Randomly select a bounding box
+    selected_box = random.choice(picked_boxes)
+    # Get the center coordinates of the bounding box
+    x_center = selected_box[0] + selected_box[2] // 2
+    y_center = selected_box[1] + selected_box[3] // 2
+    # Click on the center coordinates
+    aut.click(x_center, y_center)
+    print("Clicked at:", (x_center, y_center))
+else:
+    print("No matches found.")
 # roi_top_left = (553, 377)
 # roi_bottom_right = (737, 489)
 
@@ -221,10 +233,10 @@ for box in picked_boxes:
 
 
 
-# while True:
-#     detect_coin_pouches()
-#     detect_hp()
-#     ardyknight()
+while True:
+    detect_coin_pouches()
+    detect_hp()
+    ardyknight()
 
 
 
