@@ -4,9 +4,90 @@ import cv2 as cv
 import time 
 import random 
 
+
+
+def refilldodgyneck():
+    print("checking dodgyneck..")
+
+    aut.moveTo(582, 260)#töm pouches 
+    time.sleep(0.2)
+    aut.click()
+    aut.moveTo(680, 215)#gear tab
+    time.sleep(0.2)
+    aut.click()
+
+# Define the region of interest (ROI) coordinates
+    roi_top_left = (627, 275)
+    roi_bottom_right = (664, 310)
+
+    screenshot = aut.screenshot(region=(roi_top_left[0], roi_top_left[1], 
+                                        roi_bottom_right[0] - roi_top_left[0], 
+                                        roi_bottom_right[1] - roi_top_left[1]))
+
+    # Convert the screenshot to OpenCV format (BGR)
+    screenshot_cv = cv.cvtColor(np.array(screenshot), cv.COLOR_RGB2BGR)
+
+
+    # Convert the filtered image to grayscale
+    grayscale_img = cv.cvtColor(screenshot_cv, cv.COLOR_BGR2GRAY)
+
+    # Load the template image
+    template = cv.imread('dodgyneck.png', cv.IMREAD_GRAYSCALE)
+
+    # Blur both the grayscale image and the template
+    blur = cv.blur(grayscale_img, (3,3))
+    blur1 = cv.blur(template, (3,3))
+
+    # Apply Canny edge detection to both images
+    canny = cv.Canny(blur, 125, 175)
+    canny1 = cv.Canny(blur1, 125, 175)
+
+    result = cv.matchTemplate(canny, canny1, cv.TM_CCOEFF_NORMED)
+
+        # Define a threshold for the match
+    threshold = 0.53
+
+    # Get the location of the best match
+    _, max_val, _, _ = cv.minMaxLoc(result)
+
+    # Check if the maximum match value is above the threshold
+    if max_val >= threshold:
+        print("Match found! not going to get necklace")
+        print("Max value:", max_val)
+        aut.moveTo(650,215)#tillbaka till inventory tabben
+        time.sleep(0.2)
+        aut.click()
+    else:
+        print("No match found, going to get a new necklace..")
+        print("Max value:", max_val)
+        aut.moveTo(650,215)#tillbaka till inventory tabben
+        time.sleep(0.2)
+        aut.click()
+        time.sleep(5.5)
+        aut.moveTo(429, 186)#bank
+        aut.click()
+        time.sleep(3)
+        aut.moveTo(239, 126)#neck
+        aut.click()
+        time.sleep(0.6)
+        aut.press("esc")
+
+        aut.moveTo(582, 260)#wear necklace 
+        time.sleep(0.2)
+        aut.click()
+        time.sleep(0.6)
+
+        aut.moveTo(73, 177)#tillbaka / ardy knight i banken
+        aut.click()
+        time.sleep(2)
+        
+        
+
+
+
 def ardyknight():
     print("Stealing..")
-    aut.moveTo(63, 217)
+    aut.moveTo(267, 135)
     aut.click()
     time.sleep(0.6)
 
@@ -50,10 +131,10 @@ def detect_coin_pouches():
 
 def detect_hp():
     print("checking hp..")
-    # Define the region of interest (ROI) coordinates
-    roi_top_left = (525, 83)
-    roi_bottom_right = (543, 95)
-    
+# Define the region of interest (ROI) coordinates
+    roi_top_left = (526, 72)
+    roi_bottom_right = (572, 95)
+
     screenshot = aut.screenshot(region=(roi_top_left[0], roi_top_left[1], 
                                         roi_bottom_right[0] - roi_top_left[0], 
                                         roi_bottom_right[1] - roi_top_left[1]))
@@ -61,21 +142,25 @@ def detect_hp():
     # Convert the screenshot to OpenCV format (BGR)
     screenshot_cv = cv.cvtColor(np.array(screenshot), cv.COLOR_RGB2BGR)
 
-    # Convert the screenshot to grayscale
+
+    # Convert the filtered image to grayscale
     grayscale_img = cv.cvtColor(screenshot_cv, cv.COLOR_BGR2GRAY)
 
     # Load the template image
     template = cv.imread('hp.png', cv.IMREAD_GRAYSCALE)
+
+    # Blur both the grayscale image and the template
     blur = cv.blur(grayscale_img, (3,3))
     blur1 = cv.blur(template, (3,3))
+
+    # Apply Canny edge detection to both images
     canny = cv.Canny(blur, 125, 175)
     canny1 = cv.Canny(blur1, 125, 175)
 
-    # Perform template matching
     result = cv.matchTemplate(canny, canny1, cv.TM_CCOEFF_NORMED)
 
-    # Define a threshold for the match
-    threshold = 0.4
+        # Define a threshold for the match
+    threshold = 0.53
 
     # Get the location of the best match
     _, max_val, _, _ = cv.minMaxLoc(result)
@@ -138,14 +223,18 @@ def detect_jugs_and_drink():
         x_center = selected_box[0] + selected_box[2] // 2
         y_center = selected_box[1] + selected_box[3] // 2
         # Click on the center coordinates
+        time.sleep(0.2)
+        aut.click(x_center, y_center)
         aut.click(x_center, y_center)
         print("Clicked at:", (x_center, y_center))
-        time.sleep(0.6)
+        time.sleep(1)
         aut.keyDown("shift")
+        time.sleep(1)
         aut.click()
         aut.keyUp("shift")
     else:
         print("No matches found.")
+        banka()
 
 def non_max_suppression(boxes, overlap_threshold):
     if len(boxes) == 0:
@@ -181,142 +270,76 @@ def non_max_suppression(boxes, overlap_threshold):
 
     return picked_boxes
 
-# Define the region coordinates
-x1, y1 = 8, 31
-x2, y2 = 520, 366
+# # Define the region coordinates
+# x1, y1 = 8, 31
+# x2, y2 = 520, 366
 
-# Take a screenshot of the specified region
-screenshot = aut.screenshot(region=(x1, y1, x2 - x1, y2 - y1))
+# # Take a screenshot of the specified region
+# screenshot = aut.screenshot(region=(x1, y1, x2 - x1, y2 - y1))
 
-# Convert the screenshot to OpenCV format (BGR)
-screenshot_cv = np.array(screenshot)
+# # Convert the screenshot to OpenCV format (BGR)
+# screenshot_cv = np.array(screenshot)
 
-# Convert BGR to HSV
-hsv = cv.cvtColor(screenshot_cv, cv.COLOR_RGB2HSV)
+# # Convert BGR to HSV
+# hsv = cv.cvtColor(screenshot_cv, cv.COLOR_RGB2HSV)
 
-# Define lower and upper bounds for yellow color
-lower_yellow = np.array([20, 100, 100])
-upper_yellow = np.array([40, 255, 255])
+# # Define lower and upper bounds for yellow color
+# lower_yellow = np.array([20, 100, 100])
+# upper_yellow = np.array([40, 255, 255])
 
-# Threshold the HSV image to get only yellow colors
-mask = cv.inRange(hsv, lower_yellow, upper_yellow)
+# # Threshold the HSV image to get only yellow colors
+# mask = cv.inRange(hsv, lower_yellow, upper_yellow)
 
-# Apply Canny edge detection
-edges = cv.Canny(mask, 30, 150)
+# # Apply Canny edge detection
+# edges = cv.Canny(mask, 30, 150)
 
-# Find contours in the edge-detected image
-contours, _ = cv.findContours(edges, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
+# # Find contours in the edge-detected image
+# contours, _ = cv.findContours(edges, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
 
-# Draw contours on the screenshot image
-screenshot_with_contours = screenshot_cv.copy()
-cv.drawContours(screenshot_with_contours, contours, -1, (0, 255, 0), 2)
+# # Draw contours on the screenshot image
+# screenshot_with_contours = screenshot_cv.copy()
+# cv.drawContours(screenshot_with_contours, contours, -1, (0, 255, 0), 2)
 
-# Display the screenshot image with the contours
-cv.imshow('Screenshot with Contours', screenshot_with_contours)
-cv.waitKey(0)
-cv.destroyAllWindows()
-# print("Restocking and detecting..")
-
-# Restock
-# print("Restocking..")
-
-
-# aut.moveTo(680, 210)
-# aut.click()
-# time.sleep(0.2)
-# aut.moveTo(605, 300)
-# aut.click()
-# time.sleep(4)
-# aut.moveTo(260, 240)
-# aut.scroll(-5000)   # scroll up 10 "clicks"
-
-
-
-# aut.moveTo(172, 273)
-# aut.click()
-# time.sleep(4)
-
-
-# aut.moveTo(140, 127)
-# aut.click()
-# time.sleep(0.6)
-
-# aut.moveTo(583, 260)
-# aut.click()
-
-# aut.moveTo(626, 260)
-# aut.click()
-
-# aut.press("esc")
-
-
-# aut.moveTo(750, 215)
-# aut.click()
-# time.sleep(0.2)
-# aut.moveTo(647, 341)
-# aut.click()
-# time.sleep(4)
-
-
-# aut.moveTo(650, 215) #tp till ardy 
-# aut.click()
-
-
-# print("Detecting the item..")
-# template = cv.imread('bankikon.png', cv.IMREAD_GRAYSCALE)
-# template_height, template_width = template.shape
-
-# roi_top_left = (577, 77)
-# roi_bottom_right = (612, 120)
-# screenshot = aut.screenshot(region=(roi_top_left[0], roi_top_left[1], 
-#                                     roi_bottom_right[0] - roi_top_left[0], 
-#                                     roi_bottom_right[1] - roi_top_left[1]))
-
-# screenshot_np = np.array(screenshot)
-
-# # Apply Gaussian blur to the screenshot
-# screenshot_blurred = cv.GaussianBlur(screenshot_np, (7, 7), 0)
-
-# # Convert the blurred screenshot to grayscale
-# screenshot_gray = cv.cvtColor(screenshot_blurred, cv.COLOR_RGB2GRAY)
-
-# # Apply Gaussian blur to the template
-# template_blurred = cv.GaussianBlur(template, (7, 7), 0)
-
-# # Convert the blurred template to grayscale
-# template_gray = cv.cvtColor(template_blurred, cv.COLOR_GRAY2BGR)
-
-# # Convert both the screenshot and template to Canny edges
-# screenshot_edges = cv.Canny(screenshot_gray, 125, 175)
-# template_edges = cv.Canny(template_gray, 125, 175)
-# cv.imshow("1", screenshot_edges)
-# cv.imshow("2", template_edges )
+# # Display the screenshot image with the contours
+# cv.imshow('Screenshot with Contours', screenshot_with_contours)
 # cv.waitKey(0)
 # cv.destroyAllWindows()
-# # Perform template matching
-# result = cv.matchTemplate(screenshot_edges, template_edges, cv.TM_CCOEFF_NORMED)
+# print("Restocking and detecting..")
 
-# # Find the location of the maximum value
-# min_val, max_val, min_loc, max_loc = cv.minMaxLoc(result)
+def banka():
+    time.sleep(5.5)
+    aut.moveTo(429, 186)#bank
+    aut.click()
+    time.sleep(3)
 
-# # Convert the max_loc to the actual screen location
-# max_loc_screen = (max_loc[0] + roi_top_left[0], max_loc[1] + roi_top_left[1])
+    aut.moveTo(198, 131)#jugs 
+    aut.click()
+    time.sleep(1)
 
-# # Print the maximum value and its screen location
-# print("Max value:", max_val)
-# print("Max location (on screen):", max_loc_screen)
+    aut.moveTo(582, 260)#
+    aut.click()
+    time.sleep(0.6)
+    aut.moveTo(582, 296)#
+    aut.click()
+    time.sleep(0.6)
+    aut.moveTo(624, 296)#
+    aut.click()
+    time.sleep(0.6)
+    aut.press("esc")
 
-# # Move the mouse to the center of the detected item and click
-# item_center_x = max_loc_screen[0] + template_width // 2
-# item_center_y = max_loc_screen[1] + template_height // 2
-# aut.moveTo(item_center_x, item_center_y)
-# aut.click()
+    aut.moveTo(73, 177)#tillbaka / ardy knight i banken
+    aut.click()
+    time.sleep(2)
 
 
-# while True:
-#     detect_coin_pouches()
-#     detect_hp()
-#     ardyknight()
+
+
+while True:
+    for i in range(40):
+        detect_coin_pouches()
+        detect_hp()
+        ardyknight()
+    refilldodgyneck()
 
 
 

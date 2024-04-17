@@ -22,6 +22,7 @@ def herb():
     aut.click()
     time.sleep(0.2)
     aut.moveTo(669, 368)  
+    time.sleep(0.2)
     aut.click()
 
     time.sleep(0.6)
