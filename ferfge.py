@@ -37,25 +37,6 @@ while True:
         canny1 = cv.Canny(blur1, 125, 175)
 
         # Perform template matching
-        # result = cv.matchTemplate(canny, canny1, cv.TM_CCOEFF_NORMED)
-
-        # # Define a threshold for the match
-        # threshold = 0.3
-
-        # # Get the location of the best match
-        # _, max_val, _, max_loc = cv.minMaxLoc(result)
-
-        # # Print the location of the maximum value on the screen
-        # max_loc_screen = (max_loc[0] + roi_top_left[0], max_loc[1] + roi_top_left[1])
-        # print("Max location (on screen):", max_loc_screen)
-
-        # cv.imshow("1", canny)
-        # cv.imshow("2", canny1)
-
-        # cv.waitKey(0)
-        # cv.destroyAllWindows()
-
-        # Perform template matching
         result = cv.matchTemplate(canny, canny1, cv.TM_CCOEFF_NORMED)
 
         # Define a threshold for the match
@@ -78,9 +59,9 @@ while True:
         print("Max center location (on screen):", center_screen)
         print()
 
-        # If the maximum value exceeds the threshold, click on the center screen location
+        # If the maximum value exceeds the threshold, click 18 pixels to the right and 29 pixels down from the center screen location
         if max_val >= threshold:
-            aut.click(center_screen[0], center_screen[1])
+            aut.click(center_screen[0] + 18, center_screen[1] + 29)
 
         # Add a short delay before moving to the next template
         time.sleep(1)

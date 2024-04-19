@@ -9,9 +9,11 @@ def herb():
 
     aut.moveTo(450, 340)  
     aut.click()
+    
 
     aut.moveTo(142, 129)  
     aut.click()
+    time.sleep(0.6)
 
     aut.moveTo(91, 133)  
     aut.click()
@@ -20,12 +22,12 @@ def herb():
 
     aut.moveTo(625, 372)  
     aut.click()
-    time.sleep(0.2)
+    time.sleep(0.6)
     aut.moveTo(669, 368)  
-    time.sleep(0.2)
+    time.sleep(0.6)
     aut.click()
 
-    time.sleep(0.6)
+    time.sleep(1)
     aut.press("space")
     time.sleep(9)
 

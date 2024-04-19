@@ -9,9 +9,6 @@ import random
 def refilldodgyneck():
     print("checking dodgyneck..")
 
-    aut.moveTo(582, 260)#töm pouches 
-    time.sleep(0.2)
-    aut.click()
     aut.moveTo(680, 215)#gear tab
     time.sleep(0.2)
     aut.click()
@@ -60,13 +57,21 @@ def refilldodgyneck():
     else:
         print("No match found, going to get a new necklace..")
         print("Max value:", max_val)
+        time.sleep(5.5)
         aut.moveTo(650,215)#tillbaka till inventory tabben
         time.sleep(0.2)
         aut.click()
-        time.sleep(5.5)
-        aut.moveTo(429, 186)#bank
+        aut.moveTo(582, 260)#töm pouches 
+        time.sleep(1)
+        aut.click()
+        aut.click()
+        aut.moveTo(490,292)#gå framför banken 
+        time.sleep(0.2)
         aut.click()
         time.sleep(3)
+        aut.moveTo(342, 292)#bank
+        aut.click()
+        time.sleep(1)
         aut.moveTo(239, 126)#neck
         aut.click()
         time.sleep(0.6)
@@ -75,11 +80,11 @@ def refilldodgyneck():
         aut.moveTo(582, 260)#wear necklace 
         time.sleep(0.2)
         aut.click()
-        time.sleep(0.6)
+        time.sleep(2)
 
         aut.moveTo(73, 177)#tillbaka / ardy knight i banken
         aut.click()
-        time.sleep(2)
+        time.sleep(4)
         
         
 
@@ -89,9 +94,10 @@ def ardyknight():
     print("Stealing..")
     aut.moveTo(267, 135)
     aut.click()
-    time.sleep(0.6)
+    time.sleep(0.3)
 
 def detect_coin_pouches():
+    
     print("checking pouches..")
     # Define the region of interest (ROI) coordinates
     roi_top_left = (560, 235)
@@ -126,8 +132,11 @@ def detect_coin_pouches():
         aut.moveTo(582, 260)
         time.sleep(0.2)
         aut.click()
+        # Reset the timer by returning the current time
+        return True
     else:
         print("No match found, continuing with the script ")
+        return False
 
 def detect_hp():
     print("checking hp..")
@@ -160,7 +169,7 @@ def detect_hp():
     result = cv.matchTemplate(canny, canny1, cv.TM_CCOEFF_NORMED)
 
         # Define a threshold for the match
-    threshold = 0.53
+    threshold = 0.49
 
     # Get the location of the best match
     _, max_val, _, _ = cv.minMaxLoc(result)
@@ -223,7 +232,7 @@ def detect_jugs_and_drink():
         x_center = selected_box[0] + selected_box[2] // 2
         y_center = selected_box[1] + selected_box[3] // 2
         # Click on the center coordinates
-        time.sleep(0.2)
+        time.sleep(0.6)
         aut.click(x_center, y_center)
         aut.click(x_center, y_center)
         print("Clicked at:", (x_center, y_center))
@@ -308,9 +317,14 @@ def non_max_suppression(boxes, overlap_threshold):
 
 def banka():
     time.sleep(5.5)
-    aut.moveTo(429, 186)#bank
+    aut.moveTo(505,290)#gå framför banken 
+    time.sleep(0.6)
     aut.click()
     time.sleep(3)
+    aut.moveTo(342, 292)#bank
+    time.sleep(0.2)
+    aut.click()
+    time.sleep(1)
 
     aut.moveTo(198, 131)#jugs 
     aut.click()
@@ -329,17 +343,31 @@ def banka():
 
     aut.moveTo(73, 177)#tillbaka / ardy knight i banken
     aut.click()
-    time.sleep(2)
+    time.sleep(4)
 
 
+#ta hänsyn till stun vid varje grej man gör 
 
 
+def check_timer(start_time):
+    elapsed_time = time.time() - start_time
+    if elapsed_time >= 120:  # 2 minutes = 180 seconds
+        print("No coin pouches found after 5 minutes. Exiting the script.")
+        exit()
+    else:
+        return time.time()  # Return current time to reset the timer
+
+# Main loop
 while True:
-    for i in range(40):
-        detect_coin_pouches()
+    start_time = time.time()  # Start the timer
+    for i in range(80):
+        if detect_coin_pouches():
+            start_time = time.time()  # Reset the timer if coin pouches were detected
         detect_hp()
         ardyknight()
+        start_time = check_timer(start_time)  # Check if 2 minutes have passed and reset the timer if needed
     refilldodgyneck()
+    
 
 
 
