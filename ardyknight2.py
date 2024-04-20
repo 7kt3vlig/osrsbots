@@ -132,6 +132,7 @@ def detect_coin_pouches():
         aut.moveTo(582, 260)
         time.sleep(0.2)
         aut.click()
+        aut.click()
         # Reset the timer by returning the current time
         return True
     else:
@@ -351,24 +352,36 @@ def banka():
 
 def check_timer(start_time):
     elapsed_time = time.time() - start_time
-    if elapsed_time >= 120:  # 2 minutes = 180 seconds
-        print("No coin pouches found after 5 minutes. Exiting the script.")
-        exit()
+    if elapsed_time >= 120:  # 1 minute = 60 seconds
+        print("No coin pouches found after 1 minute. Exiting the main loop.")
+        return False  # Return False to indicate that the main loop should exit
     else:
-        return time.time()  # Return current time to reset the timer
+        return True  # Return True to indicate that the main loop should continue
 
 # Main loop
-while True:
+continue_loop = True
+while continue_loop:
     start_time = time.time()  # Start the timer
     for i in range(80):
         if detect_coin_pouches():
             start_time = time.time()  # Reset the timer if coin pouches were detected
         detect_hp()
         ardyknight()
-        start_time = check_timer(start_time)  # Check if 2 minutes have passed and reset the timer if needed
-    refilldodgyneck()
+        if not check_timer(start_time):  # Check if 1 minute has passed and exit the main loop if needed
+            continue_loop = False
+            break
+    if continue_loop:
+        refilldodgyneck()
     
 
+#zoom plugin 
+#equipment inspector 
+#player indicator för rogue chest 
+#hitts items in game som hjälper 
+#ghommals hilt 35 combat achievement task för mith grapple 
+# hur man gör en plugin 
+# world hopper för script 
+# gör en bot baserat på en plugin 
 
 
 
