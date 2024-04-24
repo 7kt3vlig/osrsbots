@@ -25,7 +25,7 @@ def stolen():
 
 def bygg(): #11 gånger per inv 
 
-    for x in range (22):
+    for x in range (23):
 
         aut.moveTo(824, 194)
         time.sleep(0.2)
@@ -52,14 +52,14 @@ def tbx():
     aut.moveTo(857, 196)
     time.sleep(0.2)
     aut.click()
-    time.sleep(5)
+    time.sleep(8)
     
 
 def vattenkannorna():
     aut.moveTo(1246, 128) #vattenrummet 
     time.sleep(0.2)
     aut.click()
-    time.sleep(12)
+    time.sleep(6)
 
     aut.moveTo(1197, 254)
     time.sleep(0.2)
@@ -71,7 +71,7 @@ def vattenkannorna():
     aut.moveTo(691, 100)
     time.sleep(0.2)
     aut.click()
-    time.sleep(10)
+    time.sleep(8)
 
 
 

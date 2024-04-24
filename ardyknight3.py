@@ -72,6 +72,10 @@ def refilldodgyneck():
         aut.moveTo(342, 292)#bank
         aut.click()
         time.sleep(1)
+        aut.moveTo(161, 95)#jugs rutan i banken 
+        time.sleep(0.2)
+        aut.click()
+        time.sleep(0.6)
         aut.moveTo(239, 126)#neck
         aut.click()
         time.sleep(0.6)
@@ -131,6 +135,7 @@ def detect_coin_pouches():
         print("detected pouches, clicking them")
         aut.moveTo(582, 260)
         time.sleep(0.2)
+        aut.click()
         aut.click()
         aut.click()
         # Reset the timer by returning the current time
@@ -292,6 +297,11 @@ def banka():
     aut.click()
     time.sleep(1)
 
+    aut.moveTo(161, 95)#jugs rutan i banken 
+    time.sleep(0.2)
+    aut.click()
+    time.sleep(0.6)
+
     aut.moveTo(198, 131)#jugs 
     aut.click()
     time.sleep(1)
@@ -312,27 +322,52 @@ def banka():
     time.sleep(4)
 
 
-#ta hänsyn till stun vid varje grej man gör 
 
 
-def check_timer(start_time):
-    elapsed_time = time.time() - start_time
-    if elapsed_time >= 120:  # 1 minute = 60 seconds
-        print("No coin pouches found after 1 minute. Exiting the main loop.")
-        return False  # Return False to indicate that the main loop should exit
-    else:
-        return True  # Return True to indicate that the main loop should continue
-
-while True:
+# # Main loop
+# def main():
         
-    for i in range(80):
-        detect_coin_pouches()
-        detect_hp()
-        ardyknight()
+#         for i in range(80):
+#             detect_coin_pouches()
+#             detect_hp()
+#             ardyknight()
 
+#         refilldodgyneck()
         
-    refilldodgyneck()
-        
+
+
+
+def main():
+    start_time = time.time()  # Start the timer
+    iteration_count = 0  # Initialize iteration counter
+
+    while True:
+        for i in range(80):
+            if detect_coin_pouches():
+                start_time = time.time()  # Reset the timer if coin pouches were detected
+                break  # Exit the loop if a pouch is detected within 60 seconds
+            elif time.time() - start_time >= 180:
+                print("No coin pouches found within 180 seconds. Exiting.")
+                return  # Exit the main function if no pouches are detected within 60 seconds
+            
+            detect_hp()
+            ardyknight()
+
+            # Increment the iteration counter
+            iteration_count += 1
+
+            # Check if 80 iterations of the first three elements are completed
+            if iteration_count % 80 == 0:
+                refilldodgyneck()
+                iteration_count = 0  # Reset the counter after calling refilldodgyneck
+
+if __name__ == "__main__":
+    main()
+
+# cv.waitKey(0)
+# cv.destroyAllWindows()
+
+
 
 #zoom plugin 
 #equipment inspector 
@@ -342,6 +377,8 @@ while True:
 # hur man gör en plugin 
 # world hopper för script 
 # gör en bot baserat på en plugin 
+# skript som thievar no fingers 
+
 
 
 
