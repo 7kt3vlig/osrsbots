@@ -16,7 +16,7 @@ def kolla_inventory():
 
     grayscale = cv.cvtColor(screenshot_cv, cv.COLOR_BGR2GRAY)
 
-    template = cv.imread(str("fullinventory.png"), cv.IMREAD_GRAYSCALE)
+    template = cv.imread("fullinventory.png", cv.IMREAD_GRAYSCALE)
 
     result = cv.matchTemplate(grayscale, template, cv.TM_CCOEFF_NORMED )
 
@@ -104,101 +104,129 @@ def fiska():
 
 
 
+def findclosestfishingspot():
+    print("Executing findclosestfishingspot()")
+    top_left = 1, 225
+    bottom_right = 515, 259
+
+    screenshot = aut.screenshot(region=(top_left[0], top_left[1],
+                                        bottom_right[0] - top_left[0],
+                                        bottom_right[1] - top_left[1]))
+
+    screenshot_cv = cv.cvtColor(np.array(screenshot), cv.COLOR_RGB2BGR)
+    grayscale = cv.cvtColor(screenshot_cv, cv.COLOR_BGR2GRAY)
+
+    template = cv.imread("sturgeon.png", cv.IMREAD_GRAYSCALE)
+
+    result = cv.matchTemplate(grayscale, template, cv.TM_CCOEFF_NORMED)
+
+    threshold = 0.6
+
+    min_val, max_val, min_loc, max_loc = cv.minMaxLoc(result)
+
+    print(min_val, max_val, min_loc, max_loc)
+
+    if max_val >= threshold:
+        locs = np.where(result >= threshold)
+
+        best_match_loc = None
+        best_distance = float('inf')
+
+        matched_locations = []  # List to store all matched locations
+
+        # Target coordinates
+        target_x, target_y = 263, 191
+
+        # Iterate over all locations above threshold and find the closest one to the target coordinates
+        for pt in zip(*locs[::-1]):
+            center_x = pt[0] + (template.shape[1] // 2)
+            center_y = pt[1] + (template.shape[0] // 2)
+
+            distance = ((center_x - target_x) ** 2 + (center_y - target_y) ** 2) ** 0.5
+
+            # Check if this match is closer than the previous best match and not overlapping with it
+            if distance < best_distance:
+                overlapping = False
+                for existing_loc in matched_locations:
+                    existing_center_x = existing_loc[0] + (template.shape[1] // 2)
+                    existing_center_y = existing_loc[1] + (template.shape[0] // 2)
+                    existing_distance = ((existing_center_x - center_x) ** 2 + (existing_center_y - center_y) ** 2) ** 0.5
+                    if existing_distance < 10:  # Adjust this threshold value as needed
+                        overlapping = True
+                        break
+                if not overlapping:
+                    best_match_loc = pt
+                    best_distance = distance
+                    matched_locations.append(pt)  # Append the current match to the list
+
+        # Print all matched locations
+        print("Matched Locations:")
+        for match_loc in matched_locations:
+            print(match_loc)
+
+        if best_match_loc is not None:
+            # Click at the center of the best match location in actual screen coordinates
+            max_loc_screen_x = top_left[0] + best_match_loc[0] + 10
+            max_loc_screen_y = top_left[1] + best_match_loc[1] + 15
+            aut.click(max_loc_screen_x, max_loc_screen_y, clicks=2)
+            aut.click(max_loc_screen_x, max_loc_screen_y, clicks=2)  # Click twice on the best match
+        else:
+            print("No suitable match found. Performing default action.")
+            aut.moveTo(262, 212)
+            aut.click()
+            time.sleep(10)
+    else:
+        print("Max value not above threshold. Performing default action.")
+
+        aut.moveTo(262, 212)
+        aut.click()
+        time.sleep(10)
+
 def confirmclosestfishingspot():
-    top_left = 246, 231
+    top_left = 246, 228
     bottom_right = 279, 262
 
     screenshot = aut.screenshot(region=(top_left[0], top_left[1],
                                         bottom_right[0] - top_left[0],
                                         bottom_right[1] - top_left[1])) 
 
-    screenshot_cv = cv.cvtColor(np.array(screenshot),cv.COLOR_RGB2BGR)
-
+    screenshot_cv = cv.cvtColor(np.array(screenshot), cv.COLOR_RGB2BGR)
     grayscale = cv.cvtColor(screenshot_cv, cv.COLOR_BGR2GRAY)
 
-    template = cv.imread(str("sturgeon.png"), cv.IMREAD_GRAYSCALE)
+    template = cv.imread("sturgeon.png", cv.IMREAD_GRAYSCALE)
 
-    result = cv.matchTemplate(template, grayscale, cv.TM_CCOEFF_NORMED )
-
-    threshold = 0.76
+    blur = cv.GaussianBlur(grayscale, (3,3), 0)
+    blur1 = cv.GaussianBlur(template, (3,3), 0)
+    canny = cv.Canny(blur, 125, 175)
+    canny1 = cv.Canny(blur1, 125, 175)
+    result = cv.matchTemplate(blur, blur1, cv.TM_CCOEFF_NORMED)
+    threshold = 0.3
 
     min_val, max_val, min_loc, max_loc = cv.minMaxLoc(result)
 
-    print(min_val, max_val, min_loc, max_loc)
-    
-    if threshold >= max_val:
-        print(max_val, max_loc)
-        return True
-    else:
+    print("Min val:", min_val)
+    print("Max val:", max_val)
+    print("Min loc:", min_loc)
+    print("Max loc:", max_loc)
+
+    # Display grayscale image
+    # cv.imshow("1", canny)
+    # cv.imshow("2", canny1)
+    # cv.waitKey(0)
+    # cv.destroyAllWindows()
+
+    # Print template matching result
+    if max_val < threshold:
+        print("Template not found!")
         print(max_val, max_loc)
         return False
-    
-
-
-def findclosestfishingspot():
-
-    print("Executing findclosestfishingspot()")
-    top_left = 1, 227
-    bottom_right = 515, 270
-
-    screenshot = aut.screenshot(region=(top_left[0], top_left[1],
-                                        bottom_right[0] - top_left[0],
-                                        bottom_right[1] - top_left[1])) 
-
-    screenshot_cv = cv.cvtColor(np.array(screenshot),cv.COLOR_RGB2BGR)
-
-    grayscale = cv.cvtColor(screenshot_cv, cv.COLOR_BGR2GRAY)
-
-    template = cv.imread(str("sturgeon.png"), cv.IMREAD_GRAYSCALE)
-
-    result = cv.matchTemplate(grayscale, template, cv.TM_CCOEFF_NORMED )
-
-    threshold = 0.8
-
-    min_val, max_val, min_loc, max_loc = cv.minMaxLoc(result)
-
-    print(min_val, max_val, min_loc, max_loc)
-    locs = np.where(result >= threshold)
-
-    best_match_loc = None
-    best_distance = float('inf')
-
-    # Target coordinates
-    target_x, target_y = 263, 191
-
-    # Iterate over all locations above threshold and find the closest one to the target coordinates
-    for pt in zip(*locs[::-1]):
-        center_x = pt[0] + (template.shape[1] // 2)
-        center_y = pt[1] + (template.shape[0] // 2)
-
-        distance = ((center_x - target_x) ** 2 + (center_y - target_y) ** 2) ** 0.5
-
-        if distance < best_distance:
-            best_match_loc = pt
-            best_distance = distance
-
-    if best_match_loc is not None:
-        # Click at the center of the best match location in actual screen coordinates
-        max_loc_screen_x = top_left[0] + best_match_loc[0] + 10
-        max_loc_screen_y = top_left[1] + best_match_loc[1] + 15
-        aut.click(max_loc_screen_x, max_loc_screen_y, clicks=2)
-        aut.click(max_loc_screen_x, max_loc_screen_y, clicks=2)  # Click twice on the best match
     else:
-        aut.scroll(-5000)
-        aut.moveTo(262, 212)
-        aut.click()
-        time.sleep(10)
+        print("Template found.")
+        print(max_val, max_loc)
+        return True
 
 
-# while True:
-#     confirm_result = confirmclosestfishingspot()
-#     print("confirm_result:", confirm_result)
-#     time.sleep(0.6)
-#     if confirm_result == False:  # Check if confirmclosestfishingspot() returns False
-#         findclosestfishingspot()
-#         print("findclosestfishingspot() executed successfully")  # Add a debug print to confirm execution
-
-#     fiska()
-#     kolla_inventory()
+# if not confirmclosestfishingspot:      
+#     findclosestfishingspot()
 
 findclosestfishingspot()

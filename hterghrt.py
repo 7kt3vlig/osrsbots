@@ -4,83 +4,86 @@ import cv2 as cv
 import time 
 import random 
 
-print("checking dodgyneck..")
+def perform_template_matching():
+    print("Executing findclosestfishingspot()")
+    top_left = 1, 225
+    bottom_right = 515, 259
 
-# Define the region of interest (ROI) coordinates
-roi_top_left = (9, 32)
-roi_bottom_right = (520, 366)
+    screenshot = aut.screenshot(region=(top_left[0], top_left[1],
+                                        bottom_right[0] - top_left[0],
+                                        bottom_right[1] - top_left[1]))
 
-# Define a list of template image filenames
-template_filenames = ["paladin.png", "paladin1.png", "paladin2.png", "paladin3.png"]
+    screenshot_cv = cv.cvtColor(np.array(screenshot), cv.COLOR_RGB2BGR)
+    grayscale = cv.cvtColor(screenshot_cv, cv.COLOR_BGR2GRAY)
 
-while True:
-    for template_filename in template_filenames:
-        screenshot = aut.screenshot(region=(roi_top_left[0], roi_top_left[1], 
-                                            roi_bottom_right[0] - roi_top_left[0], 
-                                            roi_bottom_right[1] - roi_top_left[1]))
+    template = cv.imread("sturgeon.png", cv.IMREAD_GRAYSCALE)
 
-        # Convert the screenshot to OpenCV format (BGR)
-        screenshot_cv = cv.cvtColor(np.array(screenshot), cv.COLOR_RGB2BGR)
+    result = cv.matchTemplate(grayscale, template, cv.TM_CCOEFF_NORMED)
 
-        # Convert the filtered image to grayscale
-        grayscale_img = cv.cvtColor(screenshot_cv, cv.COLOR_BGR2GRAY)
+    threshold = 0.6
 
-        # Load the template image
-        template = cv.imread(template_filename, cv.IMREAD_GRAYSCALE)
+    min_val, max_val, min_loc, max_loc = cv.minMaxLoc(result)
 
-        # Blur both the grayscale image and the template
-        blur = cv.blur(grayscale_img, (3,3))
-        blur1 = cv.blur(template, (3,3))
+    print(min_val, max_val, min_loc, max_loc)
 
-        # Apply Canny edge detection to both images
-        canny = cv.Canny(blur, 125, 175)
-        canny1 = cv.Canny(blur1, 125, 175)
+    if max_val >= threshold:
+        locs = np.where(result >= threshold)
 
-        # Perform template matching
-        # result = cv.matchTemplate(canny, canny1, cv.TM_CCOEFF_NORMED)
+        best_match_loc = None
+        best_distance = float('inf')
 
-        # # Define a threshold for the match
-        # threshold = 0.3
+        matched_locations = []  # List to store all matched locations
 
-        # # Get the location of the best match
-        # _, max_val, _, max_loc = cv.minMaxLoc(result)
+        # Target coordinates
+        target_x, target_y = 263, 191
 
-        # # Print the location of the maximum value on the screen
-        # max_loc_screen = (max_loc[0] + roi_top_left[0], max_loc[1] + roi_top_left[1])
-        # print("Max location (on screen):", max_loc_screen)
+        # Iterate over all locations above threshold and find the closest one to the target coordinates
+        for pt in zip(*locs[::-1]):
+            center_x = pt[0] + (template.shape[1] // 2)
+            center_y = pt[1] + (template.shape[0] // 2)
 
-        # cv.imshow("1", canny)
-        # cv.imshow("2", canny1)
+            distance = ((center_x - target_x) ** 2 + (center_y - target_y) ** 2) ** 0.5
+
+            # Check if this match is closer than the previous best match and not overlapping with it
+            if distance < best_distance:
+                overlapping = False
+                for existing_loc in matched_locations:
+                    existing_center_x = existing_loc[0] + (template.shape[1] // 2)
+                    existing_center_y = existing_loc[1] + (template.shape[0] // 2)
+                    existing_distance = ((existing_center_x - center_x) ** 2 + (existing_center_y - center_y) ** 2) ** 0.5
+                    if existing_distance < 10:  # Adjust this threshold value as needed
+                        overlapping = True
+                        break
+                if not overlapping:
+                    best_match_loc = pt
+                    best_distance = distance
+                    matched_locations.append(pt)  # Append the current match to the list
+
+        # Print all matched locations
+        print("Matched Locations:")
+        for match_loc in matched_locations:
+            print(match_loc)
+
+        if best_match_loc is not None:
+            # Click at the center of the best match location in actual screen coordinates
+            max_loc_screen_x = top_left[0] + best_match_loc[0] + 10
+            max_loc_screen_y = top_left[1] + best_match_loc[1] + 15
+            aut.click(max_loc_screen_x, max_loc_screen_y, clicks=2)
+            aut.click(max_loc_screen_x, max_loc_screen_y, clicks=2)  # Click twice on the best match
+        else:
+            print("No suitable match found. Performing default action.")
+            
+            aut.moveTo(262, 212)
+            aut.click()
+            time.sleep(10)
+    else:
+        print("Max value not above threshold. Performing default action.")
+
+        aut.moveTo(262, 212)
+        aut.click()
+        time.sleep(10)
+# Call the function to perform template matching
+perform_template_matching()
 
         # cv.waitKey(0)
         # cv.destroyAllWindows()
-
-        # Perform template matching
-        result = cv.matchTemplate(canny, canny1, cv.TM_CCOEFF_NORMED)
-
-        # Define a threshold for the match
-        threshold = 0.2
-
-        # Get the location of the best match
-        min_val, max_val, min_loc, max_loc = cv.minMaxLoc(result)
-
-        # Calculate the center of the max location
-        template_height, template_width = template.shape
-        center_x = max_loc[0] + template_width // 2
-        center_y = max_loc[1] + template_height // 2
-
-        # Convert the center coordinates to the actual screen location
-        center_screen = (center_x + roi_top_left[0], center_y + roi_top_left[1])
-
-        # Print the template filename, maximum value, and its center screen location
-        print("Template:", template_filename)
-        print("Max value:", max_val)
-        print("Max center location (on screen):", center_screen)
-        print()
-
-        # If the maximum value exceeds the threshold, click on the center screen location
-        if max_val >= threshold:
-            aut.click(center_screen[0], center_screen[1])
-
-        # Add a short delay before moving to the next template
-        time.sleep(1)
