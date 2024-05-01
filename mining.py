@@ -26,14 +26,68 @@ def mining():
     aut.click()
     time.sleep(2.5)
 
-def motherload():
+def alkharidmining():
+    aut.moveTo(240, 160)
+    aut.click()
+    time.sleep(1.8)
 
-    1. Kollascreen
-    2. välj random ore 
-    3. ta bild 
-     
+    aut.keyDown("shift")
+    aut.moveTo(582, 257)
+    
+    aut.click()
+    aut.moveTo(625, 257)
+    
+    aut.click()
+    aut.moveTo(667, 257)
+    
+    aut.click()
+    aut.keyUp("shift")
 
 
+
+    aut.moveTo(257, 294)
+    aut.click()
+    time.sleep(1.8)
+
+    aut.keyDown("shift")
+    aut.moveTo(582, 257)
+    
+    aut.click()
+    aut.moveTo(625, 257)
+    
+    aut.click()
+    aut.moveTo(667, 257)
+    
+    aut.click()
+    aut.keyUp("shift")
+
+
+
+    aut.moveTo(188, 214)
+    aut.click()
+    time.sleep(1.8)
+
+
+    aut.keyDown("shift")
+    aut.moveTo(582, 257)
+    
+    aut.click()
+    aut.moveTo(625, 257)
+    
+    aut.click()
+    aut.moveTo(667, 257)
+    
+    aut.click()
+    aut.keyUp("shift")
+
+    
+while True:
+    alkharidmining()
+
+
+
+#iron ore 5.4 sekunder respawn 
+#1.2 sek 
 
     
 

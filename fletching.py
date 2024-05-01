@@ -41,7 +41,7 @@ def screen1fletch():
     time.sleep(1)
     aut.press("space")
 
-    #time.sleep(49)
+    time.sleep(49)
 
 
 
@@ -372,9 +372,7 @@ def screen678keepalive():
 
 while True:
     screen1fletch()
-    #screen2fletch()
-    #screen34()
-    screen2345678alch()
+    
     
     
     
