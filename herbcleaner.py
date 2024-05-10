@@ -33,10 +33,11 @@ num_rows = 7
 num_cols = 4
 
 
-
-while True:
-    herb()
-    click_positions(start_x, start_y, num_rows, num_cols, x_offset, y_offset)
+def herbclean():
         
+    while True:
+        herb()
+        click_positions(start_x, start_y, num_rows, num_cols, x_offset, y_offset)
+            
 
 
