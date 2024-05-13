@@ -197,7 +197,7 @@ def supercombat():
     time.sleep(0.2)
     aut.click()
 
-    aut.moveTo(666, 805) #pot  
+    aut.moveTo(710, 805) #pot  
     time.sleep(0.2)
     aut.click()
     time.sleep(1)
@@ -210,27 +210,28 @@ while True:
 
     screen1craft()
 
-    # time.sleep(3)  
+    # time.sleep(4)  
     # supercombat()
-    # time.sleep(7)
+    # time.sleep(8)
     # supercombat()
-    # time.sleep(7)
+    # time.sleep(8)
     # supercombat()
-    # time.sleep(7)
+    # time.sleep(8)
     # supercombat()
 
-    # for i in range(8):
-    #     herb()
-    #     click_positions(start_x, start_y, num_rows, num_cols, x_offset, y_offset)
+    for i in range(8):
+        herb()
+        click_positions(start_x, start_y, num_rows, num_cols, x_offset, y_offset)
     
 
-    
-    time.sleep(5)  
-    screen2herb()
-    time.sleep(9)
-    screen2herb()
-    time.sleep(9)
-    screen2herb()
-    time.sleep(9)
-    screen2herb()
+     
+    # time.sleep(5)  
+    # screen2herb() 
+    # time.sleep(9) 
+    # screen2herb()
+    # time.sleep(9)
+    # screen2herb() 
+    # time.sleep(9)
+    # screen2herb()
 
+ 
