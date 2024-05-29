@@ -218,7 +218,7 @@ while True:
     # supercombat()
     # time.sleep(8)
     # supercombat()
-
+ 
     for i in range(8):
         herb()
         click_positions(start_x, start_y, num_rows, num_cols, x_offset, y_offset)

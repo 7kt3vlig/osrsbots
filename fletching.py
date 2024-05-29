@@ -3,6 +3,8 @@ import numpy
 import cv2 as cv 
 import time 
 import win32 
+import threading
+
 
 def screen1fletch():
 
@@ -48,40 +50,42 @@ def screen1fletch():
 
 def screen2fletch():
 
-    aut.moveTo(1139, 200)  #banker
+    aut.moveTo(367, 709)  #banker
     time.sleep(0.2)
     aut.click()
     time.sleep(0.5)
 
-    aut.moveTo(895, 80)  #fletch tabben
+    aut.moveTo(163, 596)  #fletch tabben
     time.sleep(0.2)
     aut.click()
     time.sleep(0.2)
 
-    aut.moveTo(1221, 339) #banka allt 
+    aut.moveTo(450, 850) #banka allt 
     time.sleep(0.2)
     aut.click()
     time.sleep(0.2)
 
-    aut.moveTo(866, 120) #ta knife 
+    aut.moveTo(140, 632) #ta knife 
     aut.click()
     time.sleep(0.2)
 
-    aut.moveTo(914, 120) #ta logs  
+    aut.moveTo(92, 638) #ta logs  
     aut.click()
     time.sleep(0.2)
     aut.press("esc")
 
 
-    aut.moveTo(1355, 252) #knife inventory 
+    aut.moveTo(573, 757) #knife inventory 
     time.sleep(0.2)
     aut.click()
 
-    aut.moveTo(1397, 252) #logs  
+    aut.moveTo(607, 757) #logs  
     time.sleep(0.2)
     aut.click()
     time.sleep(1)
     aut.press("space")
+
+    time.sleep(49)
 
     
 
@@ -370,12 +374,19 @@ def screen678keepalive():
     aut.click()
     aut.click()
 
-while True:
-    screen1fletch()
     
     
     
-    
+if __name__ == '__main__':
+# Create threads for each screen action
+    t1 = threading.Thread(target=screen1fletch)
+    t2 = threading.Thread(target=screen2fletch)
+
+    # Start both threads
+    t1.start()
+   
+
+    # Wait for both threads to f
         
 
 
