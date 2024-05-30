@@ -38,7 +38,7 @@ def screen1craft():
     time.sleep(1)
     aut.press("space")
 
-    # time.sleep(49)
+    time.sleep(29)
 
 def firemake():
 
@@ -270,14 +270,16 @@ def banka():
 
 
 
-# walktospot2()
-# firemake()
-while True:
-    screen1craft()
-    time.sleep(10)
-    banka()
-    walktospot2()
-    firemake()
-    walktobank2()
+# # walktospot2()
+# # firemake()
+# while True:
+#     screen1craft()
+#     time.sleep(10)
+#     banka()
+#     walktospot2()
+#     firemake()
+#     walktobank2()
     
+while True:
 
+    screen1craft()
