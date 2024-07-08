@@ -107,7 +107,7 @@ def falador():
 
     aut.moveTo(785, 194)#5
     aut.click()
-    time.sleep(3.5)
+    time.sleep(4)
 
     aut.moveTo(746, 190)#6
     aut.click()
@@ -131,11 +131,11 @@ def falador():
 
     aut.moveTo(851, 293)#11
     aut.click()
-    time.sleep(5)
+    time.sleep(4.5)
 
     aut.moveTo(860, 200)#12
     aut.click()
-    time.sleep(3.5)
+    time.sleep(3)
 
     aut.moveTo(888, 196)#13
     aut.click()
@@ -190,7 +190,7 @@ while True:
 
     togglerun()
 '''
-while True: 
+for i in range(200):
     tabild()
     falador()
     

@@ -17,7 +17,7 @@ def portalen():
 
 def stolen():
 
-    aut.moveTo(775, 195) #gå till stol platsen 
+    aut.moveTo(814, 115) #gå till stol platsen 
     time.sleep(0.2)
     aut.click()
     time.sleep(4)
@@ -25,23 +25,23 @@ def stolen():
 
 def bygg(): #11 gånger per inv 
 
-    for x in range (2):
+    for x in range (3):
 
-        aut.moveTo(839, 176)
+        aut.moveTo(825, 192)
         time.sleep(0.2)
         aut.click(button="right")
-        aut.moveTo(839, 236)
+        aut.moveTo(825, 242)
         time.sleep(0.2)
         aut.click()
         time.sleep(0.7)
-        aut.press("2")
-        time.sleep(1)
+        aut.press("1")
+        time.sleep(2)
 
 
-        aut.moveTo(839, 176)
+        aut.moveTo(825, 192)
         time.sleep(0.2)
         aut.click(button="right")
-        aut.moveTo(839, 252)
+        aut.moveTo(825, 259)
         time.sleep(0.2)
         aut.click()
         time.sleep(0.7)
@@ -49,7 +49,7 @@ def bygg(): #11 gånger per inv
         time.sleep(1)
 
 def tbx():
-    aut.moveTo(916, 208)
+    aut.moveTo(886, 346)
     time.sleep(0.2)
     aut.click()
     time.sleep(5)
@@ -141,8 +141,6 @@ def hittaportalen():
                 print("File 'sample.png' removed successfully.")
             except Exception as e:
                 print("Error while removing file:", e)
-
-
 
 
 portalen()

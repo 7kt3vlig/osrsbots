@@ -210,6 +210,6 @@ def confirmclosestfishingspot():
 while True:
     kolla_inventory()
     confirmclosestfishingspot()
-    time.sleep(0.4)
+    time.sleep(0.6)
     kolla_inventory()
     

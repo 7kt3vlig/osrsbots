@@ -41,7 +41,7 @@ def screen1craft():
     time.sleep(1)
     aut.press("space")
 
-    # time.sleep(49)
+    time.sleep(49)
 
 def herb():
     aut.moveTo(367, 710)  #banker
@@ -115,7 +115,7 @@ def koka():
     time.sleep(1)
     aut.press("space")
 
-    # time.sleep(65)
+    time.sleep(65)
 
 
 def screen2herb():
@@ -206,9 +206,9 @@ def supercombat():
 
 
 while True:
-    # koka()
+    koka()
 
-    screen1craft()
+    # screen1craft()
 
     # time.sleep(4)  
     # supercombat()
@@ -219,9 +219,9 @@ while True:
     # time.sleep(8)
     # supercombat()
  
-    for i in range(8):
-        herb()
-        click_positions(start_x, start_y, num_rows, num_cols, x_offset, y_offset)
+    # for i in range(8):
+    #     herb()
+    #     click_positions(start_x, start_y, num_rows, num_cols, x_offset, y_offset)
     
 
      

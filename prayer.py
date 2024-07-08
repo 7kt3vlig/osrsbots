@@ -126,14 +126,20 @@ def bonesinnanphilas():
     time.sleep(1)
     aut.click()    
 
-portalen()
+# portalen()
 
-while True:
+# while True:
     
-    praya()
-    tbx()
+#     praya()
+#     tbx()
 
-    bonesinnanphilas()
-    hittaphilas()
-    hittaportalen()
+#     bonesinnanphilas()
+#     hittaphilas()
+#     hittaportalen()
 
+for i in range (50):
+        aut.moveTo(1265, 470)
+        aut.click()
+
+        aut.moveTo(790, 192)
+        aut.click()

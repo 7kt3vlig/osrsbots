@@ -270,16 +270,12 @@ def banka():
 
 
 
-# # walktospot2()
-# # firemake()
-# while True:
-#     screen1craft()
-#     time.sleep(10)
-#     banka()
-#     walktospot2()
-#     firemake()
-#     walktobank2()
-    
+# walktospot2()
+# firemake()
 while True:
-
-    screen1craft()
+    
+    banka()
+    walktospot2()
+    firemake()
+    walktobank2()
+    
