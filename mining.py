@@ -38,9 +38,6 @@ def alkharidmining():
     aut.moveTo(625, 257)
     
     aut.click()
-    aut.moveTo(667, 257)
-    
-    aut.click()
     aut.keyUp("shift")
 
 
@@ -54,9 +51,6 @@ def alkharidmining():
     
     aut.click()
     aut.moveTo(625, 257)
-    
-    aut.click()
-    aut.moveTo(667, 257)
     
     aut.click()
     aut.keyUp("shift")
@@ -75,13 +69,10 @@ def alkharidmining():
     aut.moveTo(625, 257)
     
     aut.click()
-    aut.moveTo(667, 257)
-    
-    aut.click()
     aut.keyUp("shift")
 
     
-while True:
+for i in range(1200):
     alkharidmining()
 
 

@@ -9,13 +9,13 @@ def click_positions(start_x, start_y, num_rows, num_cols, x_offset, y_offset):
             y = start_y + j * y_offset
             aut.moveTo(x, y)
             aut.click()
-            time.sleep(85)
+            time.sleep(90)
             aut.click()
-            time.sleep(85)
+            time.sleep(90)
             aut.click()
-            time.sleep(85)
+            time.sleep(90)
             aut.click()
-            time.sleep(85)
+            time.sleep(90)
 
 # aut.moveTo(585, 180)
 # aut.click()

@@ -20,7 +20,7 @@ while True:
     aut.moveTo(315, 361) #anvil 
     time.sleep(0.2)
     aut.click()
-    time.sleep(7)
+    time.sleep(4)
 
 
     aut.moveTo(205, 259) # chainbodys 
@@ -32,7 +32,7 @@ while True:
     aut.moveTo(241, 98) # banken 
     time.sleep(0.2)
     aut.click()
-    time.sleep(7)
+    time.sleep(4)
 
     aut.moveTo(450, 340) # banka allt 
     time.sleep(0.2)

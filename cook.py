@@ -206,7 +206,7 @@ def supercombat():
 
 
 while True:
-    koka()
+    # koka()
 
     # screen1craft()
 
@@ -234,4 +234,4 @@ while True:
     # time.sleep(9)
     # screen2herb()
 
- 
+ screen1craft()
