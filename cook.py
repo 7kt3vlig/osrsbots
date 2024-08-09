@@ -40,6 +40,7 @@ def screen1craft():
     aut.click()
     time.sleep(1)
     aut.press("space")
+    
 
     time.sleep(49)
 
