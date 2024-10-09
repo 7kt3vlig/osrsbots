@@ -692,6 +692,54 @@ def kollanorra2():
         else:
             pass
 
+#75 kamera 
+#börja i banken
+
+def firerunes():
+
+    aut.moveTo(824, 442) #duel ring 
+    aut.click()
+    time.sleep(0.4)
+
+    aut.moveTo(944, 661) #essense 
+    aut.click()
+    time.sleep(0.2)
+
+    aut.press("esc")
+    time.sleep(0.6)
+
+    aut.moveTo(1452, 489)
+    aut.click()
+    time.sleep(1)
+
+    aut.press("1")
+    time.sleep(5)
+
+    aut.moveTo(653, 124) #altar
+    aut.click()
+    time.sleep(6)
+
+    aut.moveTo(1110, 830) 
+    aut.click()
+    time.sleep(4)
+
+    aut.moveTo(1452, 489)
+    aut.click()
+    time.sleep(1)
+
+    aut.press("2")
+    time.sleep(5)
+
+    aut.moveTo(759, 648) #banken
+    aut.click()
+    time.sleep(3)
+
+    aut.moveTo(1117, 939) 
+    aut.click()
+    time.sleep(0.5)
+
+
+
 
 
 #aut.moveTo(1089, 185)  västra  
@@ -710,9 +758,7 @@ def snabb():
     
 
 while True:
-    snabb()
-    taenergy()
-    banka()
+    firerunes()
     
 
 

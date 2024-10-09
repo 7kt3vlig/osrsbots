@@ -3,49 +3,57 @@ import numpy as np
 import cv2 as cv 
 import time 
 
+#kamera 127
+
 def runda():
-    aut.moveTo(94, 127) #ta bars 
+    aut.moveTo(430, 306) #ta bars 
     aut.click()
     time.sleep(0.6)
     aut.press("esc")
 
-    aut.moveTo(206, 90) #tryck på grejen för att göra bars 
+    aut.moveTo(588, 256) #byt gloves till gold
     aut.click()
-    time.sleep(6.6)
-
-    aut.press("1")
-    time.sleep(4.6)
-
-
-    aut.moveTo(238, 256) #hämta bars 
-    time.sleep(0.2)
-    aut.click()
-    time.sleep(3.6)
-    aut.press("space")
     time.sleep(0.6)
 
-    aut.moveTo(400, 322) #bank
+    aut.moveTo(207, 92) #tryck på grejen för att göra bars 
+    aut.click()
+    time.sleep(12) 
+
+    aut.moveTo(588, 256) #byt gloves till ice
+    aut.click()
+    time.sleep(0.6)
+
+    aut.moveTo(223, 255) #stå bredvid bars
+    aut.click()
+    time.sleep(5)
+
+    aut.moveTo(280, 191) #tryck på bars 
+    aut.click()
+    time.sleep(2)
+
+    aut.press("space")
+    time.sleep(1)
+
+
+    aut.moveTo(414, 304) #bank
     aut.click()
     time.sleep(4.2)
 
 
-    aut.moveTo(450, 340)
+    aut.moveTo(450, 340) #banka allt
     aut.click()
     time.sleep(0.2)
 
 
 def drickenergy():
-    aut.moveTo(283, 94) #energy tabben
-    time.sleep(0.2)
-    aut.click()
-    time.sleep(0.2)
+    
 
-    aut.moveTo(92, 133) #ta pot 
+    aut.moveTo(188, 134) #ta pot 
     aut.click()
     time.sleep(0.2)
     aut.press("esc")
 
-    aut.moveTo(582, 263) #drick 
+    aut.moveTo(623, 263) #drick 
     time.sleep(0.6)
     aut.click()
     time.sleep(1)
@@ -60,10 +68,8 @@ def drickenergy():
     aut.click()
     time.sleep(0.4)
 
-    aut.moveTo(245, 88)
-    aut.click()
-    time.sleep(0.2)
 
+    
 
 while True:
         

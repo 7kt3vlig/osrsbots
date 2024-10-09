@@ -10,10 +10,9 @@ def autodropperscreen1(start_x, start_y, num_rows, num_cols, x_offset, y_offset)
         x = start_x + i * x_offset
         for j in range(num_rows):
             y = start_y + j * y_offset
-            pyautogui.keyDown("shift")
             pyautogui.moveTo(x, y)
             pyautogui.click()
-            pyautogui.keyUp("shift")
+            
 
 # Define the starting point and offsets
 start_x = 3160

@@ -1,12 +1,6 @@
 import pyautogui as aut
-import numpy as np 
 import cv2 as cv 
 import time 
-import random 
-import multiprocessing
-import math 
-import threading 
-import ctypes
 
 def autodropperscreen1(start_x, start_y, num_rows, num_cols, x_offset, y_offset):
     for i in range(num_cols):
@@ -18,12 +12,28 @@ def autodropperscreen1(start_x, start_y, num_rows, num_cols, x_offset, y_offset)
             
 
 # Define the starting point and offsets
-start_x = 3165
-start_y = 485
+start_x = 3160
+start_y = 565
 x_offset = 88
-y_offset = 70
-num_rows = 7
+y_offset = 73
+num_rows = 6
 num_cols = 4
 
-        
 autodropperscreen1(start_x, start_y, num_rows, num_cols, x_offset, y_offset)
+
+# while True:
+        
+    # for i in range (40):
+    #     aut.moveTo(2640, 560)
+    #     aut.click()
+    #     time.sleep(0.4)
+    
+
+    #     aut.moveTo(2498, 565)
+    #     aut.click()
+    #     time.sleep(0.4)
+
+   
+
+
+    

@@ -131,13 +131,13 @@ def falador():
 
     aut.moveTo(851, 293)#11
     aut.click()
-    time.sleep(4.5)
+    time.sleep(5)
 
-    aut.moveTo(860, 200)#12
+    aut.moveTo(900, 195)#12
     aut.click()
-    time.sleep(3)
+    time.sleep(3.5)
 
-    aut.moveTo(888, 196)#13
+    aut.moveTo(905, 203)#13
     aut.click()
     time.sleep(5)
 
@@ -190,7 +190,9 @@ while True:
 
     togglerun()
 '''
-for i in range(200):
+#kamera 102, 129 
+#en runda tar 68-69 sekunder
+for i in range(360):
     tabild()
     falador()
     

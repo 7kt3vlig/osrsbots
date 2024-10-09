@@ -3,6 +3,12 @@ import pyautogui as aut
 import numpy as np
 import time
 
+
+start_time = time.time()
+
+# Duration in seconds (6 hours = 6 * 60 * 60 seconds)
+duration = 6 * 60 * 60
+
 def ingenring():
     top_left = (607, 539)
     bottom_right = (695, 600)
@@ -119,5 +125,13 @@ aut.moveTo(715, 568)
 aut.click()
 time.sleep(3)
 while True:
+
+
+
+    elapsed_time = time.time() - start_time
+    if elapsed_time > duration:
+        print("6 hours have passed. Stopping the script.")
+        break
+
     gronring()
     ingenring()

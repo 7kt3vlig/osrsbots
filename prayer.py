@@ -137,7 +137,7 @@ def bonesinnanphilas():
 #     hittaphilas()
 #     hittaportalen()
 
-for i in range (10):
+for i in range (50):
         aut.moveTo(1265, 470)
         aut.click()
 

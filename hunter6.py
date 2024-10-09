@@ -4,7 +4,7 @@ import numpy as np
 import time
 
 def ingenring():
-    top_left = (324, 282)
+    top_left = (318, 274)
     bottom_right = (388, 342)
     
     # Debug print to check the region coordinates
@@ -48,7 +48,7 @@ def ingenring():
         return False
 
 def gronring():
-    top_left = (324, 282)
+    top_left = (318, 274)
     bottom_right = (388, 342)
     
     # Debug print to check the region coordinates
@@ -95,6 +95,7 @@ def gronring():
         time.sleep(3)
         aut.moveTo(1245, 495)
         aut.click()
+        time.sleep(1)
         return True
     else:
         print("No match found above the threshold for gronring.")
@@ -107,6 +108,7 @@ def click_positions(start_x, start_y, num_rows, num_cols, x_offset, y_offset):
             y = start_y + j * y_offset
             for _ in range(5):
                 aut.moveTo(x, y)
+                # aut.click()
                 aut.click(button="right")
                 aut.moveTo(x, y + 86)
                 aut.click()
@@ -122,6 +124,7 @@ def click_positions(start_x, start_y, num_rows, num_cols, x_offset, y_offset):
                         break
                     time.sleep(1)  # Add a delay to avoid overloading the CPU
 
+#kamera 648 640
 # Define the starting point and offsets
 start_x = 1245
 start_y = 565

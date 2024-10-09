@@ -96,7 +96,7 @@ def refilldodgyneck():
 
 def ardyknight():
     print("Stealing..")
-    aut.moveTo(267, 135)
+    aut.moveTo(281, 272)
     aut.click()
     time.sleep(0.3)
 

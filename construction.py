@@ -6,6 +6,45 @@ from PIL import ImageGrab, Image
 import os
 
 
+def larder():
+    aut.moveTo(784, 194) #gå till stol platsen 
+    time.sleep(0.2)
+    aut.click()
+    time.sleep(4)
+
+def bygglarder(): #2 gånger per inv 
+
+    for x in range (3):
+
+        aut.moveTo(836, 174)
+        time.sleep(0.2)
+        aut.click(button="right")
+        aut.moveTo(836, 224)
+        time.sleep(0.2)
+        aut.click()
+        time.sleep(0.7)
+        aut.press("2")
+        time.sleep(2)
+
+
+        aut.moveTo(836, 174)
+        time.sleep(0.2)
+        aut.click(button="right")
+        aut.moveTo(836, 244)
+        time.sleep(0.2)
+        aut.click()
+        time.sleep(0.7)
+        aut.press("1")
+        time.sleep(1)
+
+def tbxlarder():
+    aut.moveTo(903, 209)
+    time.sleep(0.2)
+    aut.click()
+    time.sleep(5)
+    aut.moveTo(1155, 286)
+    aut.click()
+
 def portalen():
     aut.moveTo(839, 164) #portalen 
     time.sleep(0.2)
@@ -147,8 +186,8 @@ portalen()
 
 while True:
         
-    stolen()
-    bygg()
-    tbx()
+    larder()
+    bygglarder()
+    tbxlarder()
     hittaphilas()
     hittaportalen()

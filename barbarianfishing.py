@@ -27,7 +27,9 @@ def kolla_inventory():
     print(min_val, max_val, min_loc, max_loc)
 
     if max_val >= threshold:
+        pause()
         drop()
+        
     else:
         return False
 
@@ -206,6 +208,19 @@ def confirmclosestfishingspot():
         print("spot found.")
         print(max_val, max_loc)
         fiska()
+
+
+def pause():
+    min_seconds = 2  # minimum number of seconds
+    max_seconds = 4  # maximum number of seconds
+
+# Generate a random float between min_seconds and max_seconds
+    random_pause = random.uniform(min_seconds, max_seconds)
+
+    # Pause execution for the random amount of time
+    print(f"Pausing for {random_pause:.2f} seconds...")
+    time.sleep(random_pause)
+    print("Resuming execution.")
 
 while True:
     kolla_inventory()
