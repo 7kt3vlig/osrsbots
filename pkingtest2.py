@@ -18,6 +18,8 @@ guthixrobelegs_template = cv.imread("guthixrobelegs.png")
 guthixrobetop_template = cv.imread("guthixrobetop.png")
 guthixmitre_template = cv.imread("guthixmitre.png")
 mysticsmokestaff_template = cv.imread("mysticsmokestaff.png")
+bloodbarklegs_template = cv.imread("bloodbarklegs.png")
+bloodbarkbody_template = cv.imread("bloodbarkbody.png")
 
 #melee
 
@@ -27,6 +29,8 @@ stramulet_template = cv.imread("strammy.png")
 voidwaker_template = cv.imread("voidwaker.png")
 ags_template = cv.imread("ags.png")
 leafbaxe_template = cv.imread("leafbaxe.png")
+zombieaxe_template = cv.imread("zombieaxe.png")
+ddefender_template = cv.imread("ddefender.png")
 
 
 #range
@@ -37,6 +41,9 @@ blackdhidechaps_template = cv.imread("blackdhidechaps.png")
 dragoncbow_template = cv.imread("dragoncbow.png")
 guthixchaps_template = cv.imread("guthixchaps.png")
 lightballista_template = cv.imread("lightballista.png")
+mixedhidelegs_template = cv.imread("mixedhidelegs.png")
+mixedhidetop_template = cv.imread("mixedhidetop.png")
+heavyballista_template = cv.imread("heavyballista.png")
 
 
 aut.PAUSE = 0.04 # Remove any pauses between actions
@@ -400,7 +407,10 @@ def checkrangeitems():
 
     # List of templates to check
     templates_to_check = [("lightballista", lightballista_template),
+                          ("heavyballista", heavyballista_template),
         ("runecrossbow", runecrossbow_template),
+        ("mixedhidetop", mixedhidetop_template),
+        ("micedhidelegs", mixedhidelegs_template),
         ("sunlightcrossbow", crossbow_template),
         ("dragoncrossbow", dragoncbow_template),
         ("guthixchaps", guthixchaps_template),
@@ -425,7 +435,12 @@ def checkmeleeitems2():
                           ("voidwaker", voidwaker_template),
                           ("ags", ags_template),
                           ("leafbaxe", leafbaxe_template),
+                          ("zombieaxe", zombieaxe_template),
+                          ("ddefender", ddefender_template),
         ("firecape", firecape_template),
+        ("mixedhidetop", mixedhidetop_template),
+        ("micedhidelegs", mixedhidelegs_template),
+
         ("blackdhidechaps", blackdhidechaps_template),
         ("strammy", stramulet_template)
         
@@ -451,6 +466,9 @@ def check_mageitems():
                           ("mysticsmokestaff", mysticsmokestaff_template),
              ("ahrimstaff", ahrimstaff_template),
         ("magecape", magecape_template),
+        ("bloodbarklegs", bloodbarklegs_template),
+        ("bloodbarkbody", bloodbarkbody_template),
+
         ("occult", occult_template),
         ("ghostlyrobebottoms", ghostlyrobebottoms_template),
         ("guthixrobetop", guthixrobetop_template),
@@ -506,6 +524,7 @@ def find_and_click_red_square():
     target_y = 349
 
     # Capture the screen in the defined region
+    print(f"Capturing region: {region}")
     screenshot = aut.screenshot(region=region)
     screenshot_np = np.array(screenshot)
 
@@ -520,29 +539,33 @@ def find_and_click_red_square():
     upper_cyan = np.array([155, 255, 255])
 
     # Create a mask for the cyan color
+    print("Creating mask for cyan color detection...")
     mask = cv.inRange(hsv_image, lower_cyan, upper_cyan)
 
     # Find contours in the masked image
     contours, _ = cv.findContours(mask, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
 
-    # Check if any cyan shape was detected
+    print(f"Number of contours found: {len(contours)}")
+    
     if len(contours) == 0:
-        print("No cyan shape detected.")
+        print("No cyan shapes detected in the mask.")
         return
 
     closest_distance = float('inf')  # Initialize a variable to track the shortest distance
     closest_center = None  # Track the closest center coordinates
 
     # Loop through the contours and detect cyan shapes
-    for contour in contours:
+    for i, contour in enumerate(contours):
         # Get the bounding box coordinates for the contour
         x, y, w, h = cv.boundingRect(contour)
+        print(f"Contour {i}: Position (x={x}, y={y}), Dimensions (w={w}, h={h})")
 
-        # Ensure the object is at least 13x13 pixels in size
-        if w < 13 or h < 8:
-            continue  # Skip objects that are too small
+        # Skip small shapes
+        if w < 3 or h < 3:
+            print(f"Contour {i} skipped: too small (less than 13x13 pixels).")
+            continue
 
-        # Calculate the center of the cyan shape
+        # Check for regular cyan shapes (larger than 13x13)
         center_x = x + w // 2
         center_y = y + h // 2
 
@@ -553,10 +576,21 @@ def find_and_click_red_square():
         # Calculate the Euclidean distance from the target point (x636, y349)
         distance = np.sqrt((absolute_center_x - target_x) ** 2 + (absolute_center_y - target_y) ** 2)
 
+        print(f"Contour {i}: Center at ({absolute_center_x}, {absolute_center_y}), Distance from target: {distance:.2f}")
+
         # Update the closest shape if this one is closer
         if distance < closest_distance:
             closest_distance = distance
             closest_center = (absolute_center_x, absolute_center_y)
+            print(f"Contour {i} is now the closest shape.")
+
+        # Detect potential lines (width or height greater than 20 pixels)
+        if w > 20 or h > 20:
+            aspect_ratio = max(w, h) / min(w, h) if min(w, h) > 0 else float('inf')
+            if aspect_ratio > 4:  # Aspect ratio check to confirm it's line-like
+                print(f"Contour {i}: Detected a line at (x={x}, y={y}) with dimensions (w={w}, h={h}), Aspect Ratio: {aspect_ratio:.2f}")
+            else:
+                print(f"Contour {i}: Large shape detected but not a line (aspect ratio {aspect_ratio:.2f}).")
 
     # If a closest center was found, click on it
     if closest_center is not None:
@@ -564,8 +598,7 @@ def find_and_click_red_square():
         aut.click()
         print(f"Clicked on the closest cyan shape at {closest_center} with a distance of {closest_distance:.2f}")
     else:
-        print("No valid cyan shapes were found.")
-#636 349 center own character 
+        print("No valid cyan shapes were found to click on.")
 
 # lär dig om debugging 
 
