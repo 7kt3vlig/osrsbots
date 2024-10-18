@@ -5,7 +5,7 @@ from pynput.keyboard import Key, Listener
 import math
 import time 
 
-# runelite, skärm 307 103 ,  1382 771
+# runelite, skärm 307 103 ,  1546 773
 # Load template images
 
 #mage
@@ -22,6 +22,8 @@ bloodbarklegs_template = cv.imread("bloodbarklegs.png")
 bloodbarkbody_template = cv.imread("bloodbarkbody.png")
 voidmagehelm_template = cv.imread("voidmagehelm.png")
 tome_template = cv.imread("tome.png")
+ahrimtop_template = cv.imread("ahrimtop.png")
+ahrimbottom_template = cv.imread("ahrimbottom.png")
 
 
 #melee
@@ -36,6 +38,7 @@ zombieaxe_template = cv.imread("zombieaxe.png")
 ddefender_template = cv.imread("ddefender.png")
 avernicdefender_template = cv.imread("avernicdefender.png")
 voidhelm_template = cv.imread("voidhelm.png")
+fang_template = cv.imread("fang.png")
 
 
 #range
@@ -50,11 +53,15 @@ mixedhidelegs_template = cv.imread("mixedhidelegs.png")
 mixedhidetop_template = cv.imread("mixedhidetop.png")
 heavyballista_template = cv.imread("heavyballista.png")
 voidragnehelm_template = cv.imread("voidrangehelm.png")
+eclipsehelm_template = cv.imread("eclipsehelm.png")
+eclipselegs_template = cv.imread("eclipselegs.png")
+eclipsetop_template = cv.imread("eclipsetop.png")
+atlatl_template = cv.imread("atlatl.png")
 
 
 #extras
 
-antifailspec_template = cv.imread("antifailspec.png")
+
 antifailspec1_template = cv.imread("antifailspec1.png")
 antifailspec2_template = cv.imread("antifailspec2.png")
 antifailspec3_template = cv.imread("antifailspec3.png")
@@ -74,7 +81,7 @@ def antifailspec():
     
     # Load the template image in BGR color
     templates = [
-        cv.imread("antifailspec.png"),
+        
         cv.imread("antifailspec1.png"),
         cv.imread("antifailspec2.png"),
         cv.imread("antifailspec3.png"),
@@ -88,7 +95,7 @@ def antifailspec():
             return False
     
     # Define the threshold for a match
-    threshold = 0.85
+    threshold = 0.9
 
     # Capture the screenshot of the specified region using pyautogui
     try:
@@ -427,6 +434,7 @@ def click_matches(matches):
         aut.moveTo(x, y)  # Move to each match
         aut.click()       # Click on it
         print(f"Clicked on item at ({x}, {y})")
+        
 def checkrangeitems():
 
     area_to_check = (999, 412, 238, 358)  # Area from (999, 533) to (1119, 629)
@@ -435,8 +443,11 @@ def checkrangeitems():
     templates_to_check = [("lightballista", lightballista_template),
                           ("heavyballista", heavyballista_template),
         ("runecrossbow", runecrossbow_template),
+        ("atlatl", atlatl_template),
         ("voidrangehelm", voidragnehelm_template),
-
+        ("eclipsehelm", eclipsehelm_template),
+        ("eclipsetop", eclipsetop_template),
+        ("eclipselegs", eclipselegs_template),
         ("mixedhidetop", mixedhidetop_template),
         ("micedhidelegs", mixedhidelegs_template),
         ("sunlightcrossbow", crossbow_template),
@@ -460,6 +471,7 @@ def checkmeleeitems2():
 
     # List of templates to check
     templates_to_check = [("staff", staff_template),
+                          ("fang", fang_template),
                           ("voidwaker", voidwaker_template),
                           ("ags", ags_template),
                           ("leafbaxe", leafbaxe_template),
@@ -467,6 +479,9 @@ def checkmeleeitems2():
                           ("voidhelm", voidhelm_template),
                           ("ddefender", ddefender_template),
                         ("avernicdefender", avernicdefender_template),
+                        ("eclipsehelm", eclipsehelm_template),
+        ("eclipsetop", eclipsetop_template),
+        ("eclipselegs", eclipselegs_template),
 
         ("firecape", firecape_template),
         ("mixedhidetop", mixedhidetop_template),
@@ -497,6 +512,8 @@ def check_mageitems():
                           ("mysticsmokestaff", mysticsmokestaff_template),
              ("ahrimstaff", ahrimstaff_template),
              ("voidmagehelm", voidmagehelm_template),
+             ("ahrimbottom", ahrimbottom_template),
+             ("ahrimtop", ahrimtop_template),
              ("tome", tome_template),
         ("magecape", magecape_template),
         ("bloodbarklegs", bloodbarklegs_template),
@@ -527,6 +544,7 @@ def checkmeleeitems():
     # List of templates to check
     templates_to_check = [
         ("dds", dds_template),
+        ("fang", fang_template),
          ("ags", ags_template),
         ("voidwaker", voidwaker_template),
         ("voidhelm", voidhelm_template),
@@ -534,7 +552,10 @@ def checkmeleeitems():
         ("avernicdefender", avernicdefender_template),
         ("firecape", firecape_template),
         ("strammy", stramulet_template),
-        ("blackdhidechaps", blackdhidechaps_template)
+        ("blackdhidechaps", blackdhidechaps_template),
+        ("eclipsehelm", eclipsehelm_template),
+        ("eclipsetop", eclipsetop_template),
+        ("eclipselegs", eclipselegs_template),
     ]
 
     # Find matches in the specified area
