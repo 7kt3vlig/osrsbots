@@ -9,10 +9,11 @@ import time
 #melee
 
 gmaul_template = cv.imread("gmaul.png")
+obbymaul_template = cv.imread("obbymaul.png")
 
 #extras 
 
-halfhpbar_template = cv.imread("halfhptemplate.png")
+halfhpbar_template = cv.imread("halfhpbar.png")
 
 aut.PAUSE = 0.04 # Remove any pauses between actions
 
@@ -63,7 +64,41 @@ def halfhpbar():
         return False
 
 
+def checkmeleeitems():
 
+    area_to_check = (999, 412, 238, 358)  # Area from (999, 533) to (1119, 629)
+
+    # List of templates to check
+    templates_to_check = [("gmaul", gmaul_template)
+                          
+        
+    ]
+
+    # Find matches in the specified area
+    matches = find_matches(templates_to_check, area_to_check)
+    
+    if matches:
+        click_matches(matches)  # Click all found items
+    else:
+        print("No items matched in the specified area.")
+
+def findobbymaul():
+
+    area_to_check = (999, 412, 238, 358)  # Area from (999, 533) to (1119, 629)
+
+    # List of templates to check
+    templates_to_check = [("obbymaul", obbymaul_template)
+                          
+        
+    ]
+
+    # Find matches in the specified area
+    matches = find_matches(templates_to_check, area_to_check)
+    
+    if matches:
+        click_matches(matches)  # Click all found items
+    else:
+        print("No items matched in the specified area.")
 
 
 
@@ -115,9 +150,58 @@ def find_and_click_opponent():
 
     print(f"Number of contours found: {len(contours)}")
     
-    if len(contours) == 1:
+    if len(contours) == 0:
         print("No cyan shapes detected in the mask.")
         return
+    
+    closest_distance = float('inf')  # Initialize a variable to track the shortest distance
+    closest_center = None  # Track the closest center coordinates
+
+    # Loop through the contours and detect cyan shapes
+    for i, contour in enumerate(contours):
+        # Get the bounding box coordinates for the contour
+        x, y, w, h = cv.boundingRect(contour)
+        print(f"Contour {i}: Position (x={x}, y={y}), Dimensions (w={w}, h={h})")
+
+        # Skip small shapes
+        if w < 3 or h < 3:
+            print(f"Contour {i} skipped: too small (less than 13x13 pixels).")
+            continue
+
+        # Check for regular cyan shapes (larger than 13x13)
+        center_x = x + w // 2
+        center_y = y + h // 2
+
+        # Adjust for the region offset to get absolute screen coordinates
+        absolute_center_x = center_x + region[0]
+        absolute_center_y = center_y + region[1]
+
+        # Calculate the Euclidean distance from the target point (x636, y349)
+        distance = np.sqrt((absolute_center_x - target_x) ** 2 + (absolute_center_y - target_y) ** 2)
+
+        print(f"Contour {i}: Center at ({absolute_center_x}, {absolute_center_y}), Distance from target: {distance:.2f}")
+
+        # Update the closest shape if this one is closer
+        if distance < closest_distance:
+            closest_distance = distance
+            closest_center = (absolute_center_x, absolute_center_y)
+            print(f"Contour {i} is now the closest shape.")
+
+        # Detect potential lines (width or height greater than 20 pixels)
+        if w > 20 or h > 20:
+            aspect_ratio = max(w, h) / min(w, h) if min(w, h) > 0 else float('inf')
+            if aspect_ratio > 4:  # Aspect ratio check to confirm it's line-like
+                print(f"Contour {i}: Detected a line at (x={x}, y={y}) with dimensions (w={w}, h={h}), Aspect Ratio: {aspect_ratio:.2f}")
+            else:
+                print(f"Contour {i}: Large shape detected but not a line (aspect ratio {aspect_ratio:.2f}).")
+
+    # If a closest center was found, click on it
+    if closest_center is not None:
+        aut.moveTo(closest_center[0], closest_center[1])
+        aut.click()
+        print(f"Clicked on the closest cyan shape at {closest_center} with a distance of {closest_distance:.2f}")
+    else:
+        print("No valid cyan shapes were found to click on.")
 
 
 
@@ -158,28 +242,11 @@ def click_matches(matches):
         aut.click()       # Click on it
         print(f"Clicked on item at ({x}, {y})")
         
-def checkmeleeitems():
-
-    area_to_check = (999, 412, 238, 358)  # Area from (999, 533) to (1119, 629)
-
-    # List of templates to check
-    templates_to_check = [("gmaul", gmaul_template)
-                          
-        
-    ]
-
-    # Find matches in the specified area
-    matches = find_matches(templates_to_check, area_to_check)
-    
-    if matches:
-        click_matches(matches)  # Click all found items
-    else:
-        print("No items matched in the specified area.")
 
 
-def function_t():
+def function_r():
     find_and_click_opponent()
-    time.sleep(2)
+    time.sleep(0.1)
     aut.press("2")
     checkmeleeitems()
     aut.press("1") #spec
@@ -189,6 +256,9 @@ def function_t():
     aut.press("2") #inv 
     find_and_click_opponent()
     aut.click()
+    findobbymaul()
+    find_and_click_opponent()
+
 
 
 
@@ -199,8 +269,8 @@ def function_t():
 def on_press(key):
     try:
         # Check if specific keys are pressed and execute respective functions
-        if key.char == 't':
-            function_t()
+        if key.char == 'r':
+            function_r()
         
     except AttributeError:
         # Ignore special keys that do not have a 'char' attribute

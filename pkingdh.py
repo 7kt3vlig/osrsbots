@@ -8,24 +8,6 @@ import time
 # runelite, skärm 307 103 ,  1546 773
 # Load template images
 
-#mage
-magecape_template = cv.imread("magecape.png")
-occult_template = cv.imread("occult.png")
-staff_template = cv.imread("toxicstaff.png")
-ghostlyrobebottoms_template = cv.imread("ghostlyrobebottoms.png")
-ahrimstaff_template = cv.imread("ahrimstaff.png")
-guthixrobelegs_template = cv.imread("guthixrobelegs.png")
-guthixrobetop_template = cv.imread("guthixrobetop.png")
-guthixmitre_template = cv.imread("guthixmitre.png")
-mysticsmokestaff_template = cv.imread("mysticsmokestaff.png")
-bloodbarklegs_template = cv.imread("bloodbarklegs.png")
-bloodbarkbody_template = cv.imread("bloodbarkbody.png")
-voidmagehelm_template = cv.imread("voidmagehelm.png")
-tome_template = cv.imread("tome.png")
-ahrimtop_template = cv.imread("ahrimtop.png")
-ahrimbottom_template = cv.imread("ahrimbottom.png")
-
-
 #melee
 
 dds_template = cv.imread("dds.png")
@@ -42,26 +24,8 @@ fang_template = cv.imread("fang.png")
 gmaul_template = cv.imread("gmaul.png")
 fury_template = cv.imread("fury.png")
 noxiushally_template = cv.imread("noxiushally.png")
+toraglegs_template = cv.imread("toraglegs.png")
 
-
-#range
-
-crossbow_template = cv.imread("crossbow.png")
-runecrossbow_template = cv.imread("runecrossbow.png")
-armacrossbow_template = cv.imread("armacrossbow.png")
-blackdhidechaps_template = cv.imread("blackdhidechaps.png")
-dragoncbow_template = cv.imread("dragoncbow.png")
-guthixchaps_template = cv.imread("guthixchaps.png")
-lightballista_template = cv.imread("lightballista.png")
-mixedhidelegs_template = cv.imread("mixedhidelegs.png")
-mixedhidetop_template = cv.imread("mixedhidetop.png")
-heavyballista_template = cv.imread("heavyballista.png")
-voidragnehelm_template = cv.imread("voidrangehelm.png")
-eclipsehelm_template = cv.imread("eclipsehelm.png")
-eclipselegs_template = cv.imread("eclipselegs.png")
-eclipsetop_template = cv.imread("eclipsetop.png")
-atlatl_template = cv.imread("atlatl.png")
-dfs_template = cv.imread("dfs.png")
 
 
 #extras
@@ -74,7 +38,7 @@ antifailspec4_template = cv.imread("antifailspec4.png")
 
 
 
-aut.PAUSE = 0.04 # Remove any pauses between actions
+aut.PAUSE = 0.03 # Remove any pauses between actions
 
 
 def antifailspec():
@@ -131,139 +95,7 @@ def antifailspec():
     print("No match found above the threshold for any antifail template.")
     return False
 
-def firesurge():
-    top_left = (1026, 660)
-    bottom_right = (1069, 702)
-    
-    # Debug print to check the region coordinates
-    print(f"Top left: {top_left}, Bottom right: {bottom_right}")
-    
-    # Load the template image in BGR color
-    template = cv.imread("firesurge.png")
-    
-    if template is None:
-        print("Template image firesurge.png not found or unable to load.")
-        return False
 
-    # Define the threshold for a match
-    threshold = 0.8
-
-    # Capture the screenshot of the specified region using pyautogui
-    try:
-        screenshot = aut.screenshot(region=(top_left[0], top_left[1],
-                                            bottom_right[0] - top_left[0],
-                                            bottom_right[1] - top_left[1]))
-        screenshot_cv = cv.cvtColor(np.array(screenshot), cv.COLOR_RGB2BGR)
-    except Exception as e:
-        print(f"Error capturing screenshot with pyautogui: {e}")
-        return False
-
-    # Perform template matching using the color image
-    result = cv.matchTemplate(screenshot_cv, template, cv.TM_CCOEFF_NORMED)
-    
-    # Get the best match position
-    min_val, max_val, min_loc, max_loc = cv.minMaxLoc(result)
-    print("Printing matching values for firesurge:")
-    print(f"Min value: {min_val}, Max value: {max_val}, Min location: {min_loc}, Max location: {max_loc}")
-    
-    # If the match is above the threshold, click on the position
-    if max_val >= threshold:
-        print("Match found for firesurge.")
-       
-        return True
-    else:
-        print("No match found above the threshold for firesurge.")
-        return False
-
-
-def TB():
-    top_left = (1123, 630)
-    bottom_right = (1165, 676)
-    
-    # Debug print to check the region coordinates
-    print(f"Top left: {top_left}, Bottom right: {bottom_right}")
-    
-    # Load the template image in BGR color
-    template = cv.imread("TB.png")
-    
-    if template is None:
-        print("Template image tb.png not found or unable to load.")
-        return False
-
-    # Define the threshold for a match
-    threshold = 0.7
-
-    # Capture the screenshot of the specified region using pyautogui
-    try:
-        screenshot = aut.screenshot(region=(top_left[0], top_left[1],
-                                            bottom_right[0] - top_left[0],
-                                            bottom_right[1] - top_left[1]))
-        screenshot_cv = cv.cvtColor(np.array(screenshot), cv.COLOR_RGB2BGR)
-    except Exception as e:
-        print(f"Error capturing screenshot with pyautogui: {e}")
-        return False
-
-    # Perform template matching using the color image
-    result = cv.matchTemplate(screenshot_cv, template, cv.TM_CCOEFF_NORMED)
-    
-    # Get the best match position
-    min_val, max_val, min_loc, max_loc = cv.minMaxLoc(result)
-    print("Printing matching values for tb:")
-    print(f"Min value: {min_val}, Max value: {max_val}, Min location: {min_loc}, Max location: {max_loc}")
-    
-    # If the match is above the threshold, click on the position
-    if max_val >= threshold:
-        print("Match found for tb.")
-       
-        return True
-    else:
-        print("No match found above the threshold for tb.")
-        return False
-
-
-def entangle():
-    top_left = (1155, 596)
-    bottom_right = (1200, 639)
-    
-    # Debug print to check the region coordinates
-    print(f"Top left: {top_left}, Bottom right: {bottom_right}")
-    
-    # Load the template image in BGR color
-    template = cv.imread("entangle.png")
-    
-    if template is None:
-        print("Template image entangle.png not found or unable to load.")
-        return False
-
-    # Define the threshold for a match
-    threshold = 0.7
-
-    # Capture the screenshot of the specified region using pyautogui
-    try:
-        screenshot = aut.screenshot(region=(top_left[0], top_left[1],
-                                            bottom_right[0] - top_left[0],
-                                            bottom_right[1] - top_left[1]))
-        screenshot_cv = cv.cvtColor(np.array(screenshot), cv.COLOR_RGB2BGR)
-    except Exception as e:
-        print(f"Error capturing screenshot with pyautogui: {e}")
-        return False
-
-    # Perform template matching using the color image
-    result = cv.matchTemplate(screenshot_cv, template, cv.TM_CCOEFF_NORMED)
-    
-    # Get the best match position
-    min_val, max_val, min_loc, max_loc = cv.minMaxLoc(result)
-    print("Printing matching values for entangle:")
-    print(f"Min value: {min_val}, Max value: {max_val}, Min location: {min_loc}, Max location: {max_loc}")
-    
-    # If the match is above the threshold, click on the position
-    if max_val >= threshold:
-        print("Match found for entangle.")
-       
-        return True
-    else:
-        print("No match found above the threshold for entangle.")
-        return False
 
 
 
@@ -317,92 +149,7 @@ def meleepray():
     else:
         print("No match found above the threshold for meleepray.")
         return False
-def rangepray():
-    top_left = (1087, 632)
-    bottom_right = (1143, 689)
-    
-    # Debug print to check the region coordinates
-    print(f"Top left: {top_left}, Bottom right: {bottom_right}")
-    
-    # Load the template image in BGR color
-    template = cv.imread("rigour.png")
-    
-    if template is None:
-        print("Template image rangepray.png not found or unable to load.")
-        return False
 
-    # Define the threshold for a match
-    threshold = 0.6
-
-    # Capture the screenshot of the specified region using pyautogui
-    try:
-        screenshot = aut.screenshot(region=(top_left[0], top_left[1],
-                                            bottom_right[0] - top_left[0],
-                                            bottom_right[1] - top_left[1]))
-        screenshot_cv = cv.cvtColor(np.array(screenshot), cv.COLOR_RGB2BGR)
-    except Exception as e:
-        print(f"Error capturing screenshot with pyautogui: {e}")
-        return False
-
-    # Perform template matching using the color image
-    result = cv.matchTemplate(screenshot_cv, template, cv.TM_CCOEFF_NORMED)
-    
-    # Get the best match position
-    min_val, max_val, min_loc, max_loc = cv.minMaxLoc(result)
-    print("Printing matching values for rangepray:")
-    print(f"Min value: {min_val}, Max value: {max_val}, Min location: {min_loc}, Max location: {max_loc}")
-    
-    # If the match is above the threshold, click on the position
-    if max_val >= threshold:
-        print("Match found for rangepray.")
-       
-        return True
-    else:
-        print("No match found above the threshold for rangepray.")
-        return False
-def magepray():
-    top_left = (1132, 632)
-    bottom_right = (1196, 694)
-    
-    # Debug print to check the region coordinates
-    print(f"Top left: {top_left}, Bottom right: {bottom_right}")
-    
-    # Load the template image in BGR color
-    template = cv.imread("magepray.png")
-    
-    if template is None:
-        print("Template image magepray.png not found or unable to load.")
-        return False
-
-    # Define the threshold for a match
-    threshold = 0.7
-
-    # Capture the screenshot of the specified region using pyautogui
-    try:
-        screenshot = aut.screenshot(region=(top_left[0], top_left[1],
-                                            bottom_right[0] - top_left[0],
-                                            bottom_right[1] - top_left[1]))
-        screenshot_cv = cv.cvtColor(np.array(screenshot), cv.COLOR_RGB2BGR)
-    except Exception as e:
-        print(f"Error capturing screenshot with pyautogui: {e}")
-        return False
-
-    # Perform template matching using the color image
-    result = cv.matchTemplate(screenshot_cv, template, cv.TM_CCOEFF_NORMED)
-    
-    # Get the best match position
-    min_val, max_val, min_loc, max_loc = cv.minMaxLoc(result)
-    print("Printing matching values for magepray:")
-    print(f"Min value: {min_val}, Max value: {max_val}, Min location: {min_loc}, Max location: {max_loc}")
-    
-    # If the match is above the threshold, click on the position
-    if max_val >= threshold:
-        print("Match found for magepray. Clicking on the position.")
-       
-        return True
-    else:
-        print("No match found above the threshold for mageepray.")
-        return False
 def find_matches(templates, coordinates):
     # Initialize a list to store the coordinates of detected items
     matches = []
@@ -440,45 +187,13 @@ def click_matches(matches):
         aut.click()       # Click on it
         print(f"Clicked on item at ({x}, {y})")
         
-def checkrangeitems():
-
-    area_to_check = (999, 412, 238, 358)  # Area from (999, 533) to (1119, 629)
-
-    # List of templates to check
-    templates_to_check = [("lightballista", lightballista_template),
-                          ("heavyballista", heavyballista_template),
-        ("runecrossbow", runecrossbow_template),
-        ("armacrossbow", armacrossbow_template),
-        ("atlatl", atlatl_template),
-        ("voidrangehelm", voidragnehelm_template),
-        ("dfs", dfs_template),
-        ("fury", fury_template),
-        ("eclipsehelm", eclipsehelm_template),
-        ("eclipsetop", eclipsetop_template),
-        ("eclipselegs", eclipselegs_template),
-        ("mixedhidetop", mixedhidetop_template),
-        ("micedhidelegs", mixedhidelegs_template),
-        ("sunlightcrossbow", crossbow_template),
-        ("dragoncrossbow", dragoncbow_template),
-        ("guthixchaps", guthixchaps_template),
-        ("blackdhidechaps", blackdhidechaps_template)
-        
-    ]
-
-    # Find matches in the specified area
-    matches = find_matches(templates_to_check, area_to_check)
-    
-    if matches:
-        click_matches(matches)  # Click all found items
-    else:
-        print("No items matched in the specified area.")
 
 def checkmeleeitems2():
 # Define the area to check (x, y, width, height)
     area_to_check = (999, 412, 238, 358)  # Area from (999, 533) to (1119, 629)
 
     # List of templates to check
-    templates_to_check = [("staff", staff_template),
+    templates_to_check = [
                           ("fang", fang_template),
                           ("voidwaker", voidwaker_template),
                           ("ags", ags_template),
@@ -490,15 +205,12 @@ def checkmeleeitems2():
                         ("noxiushally", noxiushally_template),
                         # ("dfs", dfs_template),
                         ("fury", fury_template),
-                        ("eclipsehelm", eclipsehelm_template),
-        ("eclipsetop", eclipsetop_template),
-        ("eclipselegs", eclipselegs_template),
-
+                        
+                        ("toraglegs", toraglegs_template),
+                        
+        
         ("firecape", firecape_template),
-        ("mixedhidetop", mixedhidetop_template),
-        ("micedhidelegs", mixedhidelegs_template),
-
-        ("blackdhidechaps", blackdhidechaps_template),
+        
         ("strammy", stramulet_template)
         
         
@@ -514,39 +226,6 @@ def checkmeleeitems2():
 
 
 
-def check_mageitems():
-    # Define the area to check (x, y, width, height)
-    area_to_check = (999, 412, 238, 358)  # Area from (999, 533) to (1119, 629)
-
-    # List of templates to check
-    templates_to_check = [("toxicstaff", staff_template),
-                          ("mysticsmokestaff", mysticsmokestaff_template),
-             ("ahrimstaff", ahrimstaff_template),
-             ("voidmagehelm", voidmagehelm_template),
-             ("ahrimbottom", ahrimbottom_template),
-             ("ahrimtop", ahrimtop_template),
-             ("tome", tome_template),
-        ("magecape", magecape_template),
-        ("bloodbarklegs", bloodbarklegs_template),
-        ("bloodbarkbody", bloodbarkbody_template),
-
-        ("occult", occult_template),
-        ("ghostlyrobebottoms", ghostlyrobebottoms_template),
-        ("guthixrobetop", guthixrobetop_template),
-        ("guthixrobelegs", guthixrobelegs_template),
-        ("guthixmitre", guthixmitre_template)
-        
-        
-    ]
-
-    # Find matches in the specified area
-    matches = find_matches(templates_to_check, area_to_check)
-    
-    if matches:
-        click_matches(matches)  # Click all found items
-    else:
-        print("No items matched in the specified area.")
-
 
 def checkmeleeitems():
 # Define the area to check (x, y, width, height)
@@ -560,15 +239,15 @@ def checkmeleeitems():
         ("voidwaker", voidwaker_template),
         ("voidhelm", voidhelm_template),
         ("ddefender", ddefender_template),
+        ("gmaul", gmaul_template),
         # ("dfs", dfs_template),
         ("fury", fury_template),
+     
+                        ("toraglegs", toraglegs_template),
         ("avernicdefender", avernicdefender_template),
         ("firecape", firecape_template),
         ("strammy", stramulet_template),
-        ("blackdhidechaps", blackdhidechaps_template),
-        ("eclipsehelm", eclipsehelm_template),
-        ("eclipsetop", eclipsetop_template),
-        ("eclipselegs", eclipselegs_template),
+        
     ]
 
     # Find matches in the specified area
@@ -798,33 +477,6 @@ def walkhere():
 
 
 
-
-def function_e():
-    aut.press("2")
-    check_mageitems()  # Check for magecape, occult, and staff when 'e' is pressed
-    aut.press("3") #mage pray
-    if not magepray():
-            aut.moveTo(1160, 665)#augury
-            aut.click()
-
-            aut.press("4") #mage book 
-            if not firesurge():
-    
-                aut.moveTo(1049, 681, duration=0.01)#fire surge 
-                aut.click()
-            
-                aut.press("2") #inv 
-                find_and_click_red_square()
-                
-
-    if magepray():
-        aut.press("4") #mage book 
-        if not firesurge():
-            aut.moveTo(1049, 681, duration=0.01)#fire surge 
-            aut.click()
-            
-            aut.press("2") #inv 
-            find_and_click_red_square()
             
 
 def function_r():
@@ -841,14 +493,31 @@ def function_r():
         
 
         aut.press("1") #spec
-        if not antifailspec():
+        
             
-            aut.moveTo(1100, 665)#
-            aut.click()
-                
+        aut.moveTo(1100, 665)#
+        aut.click()
+        aut.click()
+        
+        
+    
+        find_and_click_red_square()
+        aut.press("2") #inv 3
+        
+    else:
+        aut.press("1") #spec
+        
+            
+        aut.moveTo(1100, 665)#
+        aut.click()
+        aut.click()
+        
 
-            aut.press("2") #inv 
-            find_and_click_red_square()
+        
+        find_and_click_red_square()
+        aut.press("2") #inv 3
+        
+        
             
         
 
@@ -863,25 +532,6 @@ def function_r():
             aut.press("2") #inv 
             find_and_click_red_square()
             
-
-def function_w():
-    aut.press("2")
-    checkrangeitems()
-    aut.press("3") #range pray
-    if not rangepray():
-
-
-        aut.moveTo(1115, 660)#
-        aut.click()
-
-        aut.press("2") #inv 
-        find_and_click_red_square()
-       
-
-    if rangepray():
-        aut.press("2") #inv 
-        find_and_click_red_square()
-   
 
 def function_q():
     aut.press("2")
@@ -903,68 +553,7 @@ def function_q():
         find_and_click_red_square()
  
 
-def function_f():#entangle
-    aut.press("2")
-    check_mageitems()  # Check for magecape, occult, and staff when 't' is pressed
-    aut.press("3") #mage pray
-    if not magepray():
-            aut.moveTo(1160, 665)#
-            aut.click()
 
-            aut.press("4") #mage book 
-            if not entangle():
-        
-
-                aut.moveTo(1180, 620, duration=0.01)#entangle
-                aut.click()
-                
-                aut.press("2") #inv 
-                find_and_click_red_square()
-
-    if magepray():
-        aut.press("4") #mage book 
-        if not entangle():
-            aut.moveTo(1180, 620, duration=0.01)#entangle
-            aut.click()
-            
-            aut.press("2") #inv 
-            find_and_click_red_square()
-        
-def function_t():#tb
-    aut.press("2")
-    check_mageitems()  # Check for magecape, occult, and staff when 't' is pressed
-    aut.press("3") #mage pray
-    if not magepray():
-            aut.moveTo(1160, 665)#
-            aut.click()
-
-            aut.press("4") #mage book 
-            if not TB():
-        
-
-                aut.moveTo(1146, 650, duration=0.01)#TB
-                aut.click()
-                
-                aut.press("2") #inv 
-                find_and_click_red_square()
-
-    if magepray():
-        aut.press("4") #mage book 
-        if not TB():
-            aut.moveTo(1146, 650, duration=0.01)#TB
-            aut.click()
-            
-            aut.press("2") #inv 
-            find_and_click_red_square()
-
-
-def function_d():
-    walkhere()
-
-def function_g():
-    aut.press("space")
-    aut.moveTo(1220, 700)
-    aut.click()
 
 
 
@@ -974,22 +563,15 @@ def function_g():
 def on_press(key):
     try:
         # Check if specific keys are pressed and execute respective functions
-        if key.char == 'e':
-            function_e()
-        elif key.char == 'r':
+        
+        if key.char == 'r':
             function_r()
-        elif key.char == 'w':
-            function_w()
+        
         elif key.char == 'q':
             function_q()
-        elif key.char == 't':
-            function_t()
-        elif key.char == 'f':
-            function_f()
-        elif key.char == 'd':
-            function_d()
-        elif key.char == 'g':
-            function_g()
+      
+        
+       
     except AttributeError:
         # Ignore special keys that do not have a 'char' attribute
         pass

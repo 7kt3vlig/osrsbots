@@ -1,11 +1,12 @@
 import pyautogui as aut
 import time 
+# aut.PAUSE = 0.02
 
 def herb():
     aut.moveTo(369, 204)  #banker
     time.sleep(0.2)
     aut.click()
-    time.sleep(1)
+    time.sleep(0.9)
 
     aut.moveTo(450, 340)  
     aut.click()
@@ -14,6 +15,8 @@ def herb():
     aut.click()
 
     aut.press("esc")
+    time.sleep(0.9)
+ 
 
 
 def click_positions(start_x, start_y, num_rows, num_cols, x_offset, y_offset):

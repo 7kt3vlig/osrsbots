@@ -42,6 +42,7 @@ fang_template = cv.imread("fang.png")
 gmaul_template = cv.imread("gmaul.png")
 fury_template = cv.imread("fury.png")
 noxiushally_template = cv.imread("noxiushally.png")
+toraglegs_template = cv.imread("toraglegs.png")
 
 
 #range
@@ -62,6 +63,7 @@ eclipselegs_template = cv.imread("eclipselegs.png")
 eclipsetop_template = cv.imread("eclipsetop.png")
 atlatl_template = cv.imread("atlatl.png")
 dfs_template = cv.imread("dfs.png")
+ktop_template = cv.imread("ktop.png")
 
 
 #extras
@@ -74,7 +76,7 @@ antifailspec4_template = cv.imread("antifailspec4.png")
 
 
 
-aut.PAUSE = 0.04 # Remove any pauses between actions
+aut.PAUSE = 0.03 # Remove any pauses between actions
 
 
 def antifailspec():
@@ -451,6 +453,8 @@ def checkrangeitems():
         ("armacrossbow", armacrossbow_template),
         ("atlatl", atlatl_template),
         ("voidrangehelm", voidragnehelm_template),
+        ("ktop", ktop_template),
+        ("toraglegs", toraglegs_template),
         ("dfs", dfs_template),
         ("fury", fury_template),
         ("eclipsehelm", eclipsehelm_template),
@@ -490,6 +494,8 @@ def checkmeleeitems2():
                         ("noxiushally", noxiushally_template),
                         # ("dfs", dfs_template),
                         ("fury", fury_template),
+                        ("ktop", ktop_template),
+                        ("toraglegs", toraglegs_template),
                         ("eclipsehelm", eclipsehelm_template),
         ("eclipsetop", eclipsetop_template),
         ("eclipselegs", eclipselegs_template),
@@ -560,8 +566,11 @@ def checkmeleeitems():
         ("voidwaker", voidwaker_template),
         ("voidhelm", voidhelm_template),
         ("ddefender", ddefender_template),
+        ("gmaul", gmaul_template),
         # ("dfs", dfs_template),
         ("fury", fury_template),
+        ("ktop", ktop_template),
+                        ("toraglegs", toraglegs_template),
         ("avernicdefender", avernicdefender_template),
         ("firecape", firecape_template),
         ("strammy", stramulet_template),
@@ -631,7 +640,7 @@ def find_and_click_red_square():
         print(f"Contour {i}: Position (x={x}, y={y}), Dimensions (w={w}, h={h})")
 
         # Skip small shapes
-        if w < 6 or h < 6:
+        if w < 4 or h < 3:
             print(f"Contour {i} skipped: too small (less than 13x13 pixels).")
             continue
 
@@ -815,6 +824,9 @@ def function_e():
             
                 aut.press("2") #inv 
                 find_and_click_red_square()
+            else:
+                aut.press("2") #inv 
+                find_and_click_red_square()
                 
 
     if magepray():
@@ -823,6 +835,9 @@ def function_e():
             aut.moveTo(1049, 681, duration=0.01)#fire surge 
             aut.click()
             
+            aut.press("2") #inv 
+            find_and_click_red_square()
+        else:
             aut.press("2") #inv 
             find_and_click_red_square()
             
@@ -839,16 +854,40 @@ def function_r():
         aut.click()
         
         
-
+        find_and_click_red_square()
         aut.press("1") #spec
-        if not antifailspec():
+        
             
-            aut.moveTo(1100, 665)#
-            aut.click()
-                
+        aut.moveTo(1100, 665)#
+        aut.click()
+        aut.click()
+        aut.click()
+        
+        
+            
 
-            aut.press("2") #inv 
-            find_and_click_red_square()
+        
+        # find_and_click_red_square()
+        aut.press("2") #inv 3
+        
+    else:
+        find_and_click_red_square()
+        aut.press("1") #spec
+        
+            
+        aut.moveTo(1100, 665)#
+        aut.click()
+        aut.click()
+        aut.click()
+        
+        
+            
+
+        
+        # find_and_click_red_square()
+        aut.press("2") #inv 3
+        
+        
             
         
 
@@ -878,7 +917,7 @@ def function_w():
         find_and_click_red_square()
        
 
-    if rangepray():
+    else:
         aut.press("2") #inv 
         find_and_click_red_square()
    
@@ -920,8 +959,12 @@ def function_f():#entangle
                 
                 aut.press("2") #inv 
                 find_and_click_red_square()
+            else:
+                aut.press("2") #inv 
+                find_and_click_red_square()
 
-    if magepray():
+
+    else:
         aut.press("4") #mage book 
         if not entangle():
             aut.moveTo(1180, 620, duration=0.01)#entangle
@@ -929,6 +972,10 @@ def function_f():#entangle
             
             aut.press("2") #inv 
             find_and_click_red_square()
+        else:
+            aut.press("2") #inv 
+            find_and_click_red_square()
+
         
 def function_t():#tb
     aut.press("2")
@@ -947,6 +994,9 @@ def function_t():#tb
                 
                 aut.press("2") #inv 
                 find_and_click_red_square()
+            else:
+                aut.press("2") #inv 
+                find_and_click_red_square()
 
     if magepray():
         aut.press("4") #mage book 
@@ -954,6 +1004,9 @@ def function_t():#tb
             aut.moveTo(1146, 650, duration=0.01)#TB
             aut.click()
             
+            aut.press("2") #inv 
+            find_and_click_red_square()
+        else:
             aut.press("2") #inv 
             find_and_click_red_square()
 
