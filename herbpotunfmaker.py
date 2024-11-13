@@ -19,16 +19,17 @@ def herb():
     aut.click()
     time.sleep(0.6)
     aut.press("esc")
+    time.sleep(0.6)
 
     aut.moveTo(625, 372)  
     aut.click()
-    time.sleep(0.2)
+    time.sleep(0.6)
     aut.moveTo(669, 368)  
     aut.click()
 
-    time.sleep(0.6)
+    time.sleep(0.9)
     aut.press("space")
-    time.sleep(9)
+    time.sleep(17.5)
 
 while True:
         

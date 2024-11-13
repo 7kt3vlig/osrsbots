@@ -4,6 +4,7 @@ import cv2 as cv
 import time 
 import random 
 
+#camera zoom 509
 def kolla_inventory():
     top_left = 100, 400
     bottom_right = 390, 490

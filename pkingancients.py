@@ -24,6 +24,7 @@ voidmagehelm_template = cv.imread("voidmagehelm.png")
 tome_template = cv.imread("tome.png")
 ahrimtop_template = cv.imread("ahrimtop.png")
 ahrimbottom_template = cv.imread("ahrimbottom.png")
+ancientstaff_template = cv.imread("ancientstaff.png")
 
 
 #melee
@@ -42,6 +43,7 @@ fang_template = cv.imread("fang.png")
 gmaul_template = cv.imread("gmaul.png")
 fury_template = cv.imread("fury.png")
 noxiushally_template = cv.imread("noxiushally.png")
+toraglegs_template = cv.imread("toraglegs.png")
 
 
 #range
@@ -62,6 +64,7 @@ eclipselegs_template = cv.imread("eclipselegs.png")
 eclipsetop_template = cv.imread("eclipsetop.png")
 atlatl_template = cv.imread("atlatl.png")
 dfs_template = cv.imread("dfs.png")
+ktop_template = cv.imread("ktop.png")
 
 
 #extras
@@ -267,6 +270,49 @@ def entangle():
 
 
 
+def barrage():
+    top_left = (1017, 660)
+    bottom_right = (1057, 695)
+    
+    # Debug print to check the region coordinates
+    print(f"Top left: {top_left}, Bottom right: {bottom_right}")
+    
+    # Load the template image in BGR color
+    template = cv.imread("barrage.png")
+    
+    if template is None:
+        print("Template image barrage.png not found or unable to load.")
+        return False
+
+    # Define the threshold for a match
+    threshold = 0.93
+
+    # Capture the screenshot of the specified region using pyautogui
+    try:
+        screenshot = aut.screenshot(region=(top_left[0], top_left[1],
+                                            bottom_right[0] - top_left[0],
+                                            bottom_right[1] - top_left[1]))
+        screenshot_cv = cv.cvtColor(np.array(screenshot), cv.COLOR_RGB2BGR)
+    except Exception as e:
+        print(f"Error capturing screenshot with pyautogui: {e}")
+        return False
+
+    # Perform template matching using the color image
+    result = cv.matchTemplate(screenshot_cv, template, cv.TM_CCOEFF_NORMED)
+    
+    # Get the best match position
+    min_val, max_val, min_loc, max_loc = cv.minMaxLoc(result)
+    print("Printing matching values for barrage:")
+    print(f"Min value: {min_val}, Max value: {max_val}, Min location: {min_loc}, Max location: {max_loc}")
+    
+    # If the match is above the threshold, click on the position
+    if max_val >= threshold:
+        print("Match found for barrage.")
+       
+        return True
+    else:
+        print("No match found above the threshold for barrage.")
+        return False
 
 
 
@@ -451,6 +497,8 @@ def checkrangeitems():
         ("armacrossbow", armacrossbow_template),
         ("atlatl", atlatl_template),
         ("voidrangehelm", voidragnehelm_template),
+        ("ktop", ktop_template),
+        ("toraglegs", toraglegs_template),
         ("dfs", dfs_template),
         ("fury", fury_template),
         ("eclipsehelm", eclipsehelm_template),
@@ -490,6 +538,8 @@ def checkmeleeitems2():
                         ("noxiushally", noxiushally_template),
                         # ("dfs", dfs_template),
                         ("fury", fury_template),
+                        ("ktop", ktop_template),
+                        ("toraglegs", toraglegs_template),
                         ("eclipsehelm", eclipsehelm_template),
         ("eclipsetop", eclipsetop_template),
         ("eclipselegs", eclipselegs_template),
@@ -522,6 +572,8 @@ def check_mageitems():
     templates_to_check = [("toxicstaff", staff_template),
                           ("mysticsmokestaff", mysticsmokestaff_template),
              ("ahrimstaff", ahrimstaff_template),
+             ("ancientatsff", ancientstaff_template),
+             
              ("voidmagehelm", voidmagehelm_template),
              ("ahrimbottom", ahrimbottom_template),
              ("ahrimtop", ahrimtop_template),
@@ -560,8 +612,11 @@ def checkmeleeitems():
         ("voidwaker", voidwaker_template),
         ("voidhelm", voidhelm_template),
         ("ddefender", ddefender_template),
+        ("gmaul", gmaul_template),
         # ("dfs", dfs_template),
         ("fury", fury_template),
+        ("ktop", ktop_template),
+                        ("toraglegs", toraglegs_template),
         ("avernicdefender", avernicdefender_template),
         ("firecape", firecape_template),
         ("strammy", stramulet_template),
@@ -631,7 +686,7 @@ def find_and_click_red_square():
         print(f"Contour {i}: Position (x={x}, y={y}), Dimensions (w={w}, h={h})")
 
         # Skip small shapes
-        if w < 6 or h < 6:
+        if w < 4 or h < 3:
             print(f"Contour {i} skipped: too small (less than 13x13 pixels).")
             continue
 
@@ -799,33 +854,7 @@ def walkhere():
 
 
 
-def function_e():
-    aut.press("2")
-    check_mageitems()  # Check for magecape, occult, and staff when 'e' is pressed
-    aut.press("3") #mage pray
-    if not magepray():
-            aut.moveTo(1160, 665)#augury
-            aut.click()
 
-            aut.press("4") #mage book 
-            if not firesurge():
-    
-                aut.moveTo(1049, 681, duration=0.01)#fire surge 
-                aut.click()
-            
-                aut.press("2") #inv 
-                find_and_click_red_square()
-                
-
-    if magepray():
-        aut.press("4") #mage book 
-        if not firesurge():
-            aut.moveTo(1049, 681, duration=0.01)#fire surge 
-            aut.click()
-            
-            aut.press("2") #inv 
-            find_and_click_red_square()
-            
 
 def function_r():
     aut.press("2")
@@ -839,16 +868,40 @@ def function_r():
         aut.click()
         
         
-
+        find_and_click_red_square()
         aut.press("1") #spec
-        if not antifailspec():
+        
             
-            aut.moveTo(1100, 665)#
-            aut.click()
-                
+        aut.moveTo(1100, 665)#
+        aut.click()
+        aut.click()
+        aut.click()
+        
+        
+            
 
-            aut.press("2") #inv 
-            find_and_click_red_square()
+        
+        # find_and_click_red_square()
+        aut.press("2") #inv 3
+        
+    else:
+        find_and_click_red_square()
+        aut.press("1") #spec
+        
+            
+        aut.moveTo(1100, 665)#
+        aut.click()
+        aut.click()
+        aut.click()
+        
+        
+            
+
+        
+        # find_and_click_red_square()
+        aut.press("2") #inv 3
+        
+        
             
         
 
@@ -878,7 +931,7 @@ def function_w():
         find_and_click_red_square()
        
 
-    if rangepray():
+    else:
         aut.press("2") #inv 
         find_and_click_red_square()
    
@@ -902,7 +955,39 @@ def function_q():
         aut.press("2") #inv 
         find_and_click_red_square()
  
+def function_e():
+    aut.press("2")
+    check_mageitems()  # Check for magecape, occult, and staff when 'e' is pressed
+    aut.press("3") #mage pray
+    if not magepray():
+            aut.moveTo(1160, 665)#augury
+            aut.click()
 
+            aut.press("4") #mage book 
+            if not barrage():
+    
+                aut.moveTo(1038, 681)#barrage
+                aut.click()
+            
+                aut.press("2") #inv 
+                find_and_click_red_square()
+            else:
+                aut.press("2") #inv 
+                find_and_click_red_square()
+                
+
+    if magepray():
+        aut.press("4") #mage book 
+        if not barrage():
+            aut.moveTo(1038, 681)#barrage
+            aut.click()
+            
+            aut.press("2") #inv 
+            find_and_click_red_square()
+        else:
+            aut.press("2") #inv 
+            find_and_click_red_square()
+            
 def function_f():#entangle
     aut.press("2")
     check_mageitems()  # Check for magecape, occult, and staff when 't' is pressed
@@ -920,8 +1005,12 @@ def function_f():#entangle
                 
                 aut.press("2") #inv 
                 find_and_click_red_square()
+            else:
+                aut.press("2") #inv 
+                find_and_click_red_square()
 
-    if magepray():
+
+    else:
         aut.press("4") #mage book 
         if not entangle():
             aut.moveTo(1180, 620, duration=0.01)#entangle
@@ -929,6 +1018,10 @@ def function_f():#entangle
             
             aut.press("2") #inv 
             find_and_click_red_square()
+        else:
+            aut.press("2") #inv 
+            find_and_click_red_square()
+
         
 def function_t():#tb
     aut.press("2")
@@ -947,6 +1040,9 @@ def function_t():#tb
                 
                 aut.press("2") #inv 
                 find_and_click_red_square()
+            else:
+                aut.press("2") #inv 
+                find_and_click_red_square()
 
     if magepray():
         aut.press("4") #mage book 
@@ -954,6 +1050,9 @@ def function_t():#tb
             aut.moveTo(1146, 650, duration=0.01)#TB
             aut.click()
             
+            aut.press("2") #inv 
+            find_and_click_red_square()
+        else:
             aut.press("2") #inv 
             find_and_click_red_square()
 

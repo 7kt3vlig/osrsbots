@@ -235,10 +235,40 @@ def supercombat():
     # time.sleep(9)
     # screen2herb()
 
+def firemake():
+    
+    aut.moveTo(367, 204)  #banker
+    time.sleep(0.2)
+    aut.click()
+    time.sleep(0.5)
 
+    aut.moveTo(122, 82)  #fletch tabben
+    time.sleep(0.2)
+    aut.click()
+    time.sleep(0.2)
+
+    
+    aut.moveTo(91, 118) #ta knife 
+    aut.click()
+    time.sleep(0.2)
+
+    
+    aut.press("esc")
+
+
+    aut.moveTo(170, 232) #
+    time.sleep(0.2)
+    aut.click()
+    time.sleep(1)
+    
+    aut.press("space")
+    
+
+    time.sleep(65)
 
 
 
 
 for i in range (300):
-    screen1craft()  
+    # firemake()  
+    screen1craft()
