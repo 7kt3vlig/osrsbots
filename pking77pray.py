@@ -62,6 +62,8 @@ eclipselegs_template = cv.imread("eclipselegs.png")
 eclipsetop_template = cv.imread("eclipsetop.png")
 atlatl_template = cv.imread("atlatl.png")
 dfs_template = cv.imread("dfs.png")
+zcb_template = cv.imread("zcb.png")
+avas_template = cv.imread("avas.png")
 
 
 #extras
@@ -448,6 +450,8 @@ def checkrangeitems():
     templates_to_check = [("lightballista", lightballista_template),
                           ("heavyballista", heavyballista_template),
         ("runecrossbow", runecrossbow_template),
+        ("zcb", zcb_template),
+        ("avas", avas_template),
         ("armacrossbow", armacrossbow_template),
         ("atlatl", atlatl_template),
         ("voidrangehelm", voidragnehelm_template),
@@ -797,8 +801,6 @@ def walkhere():
 
 
 
-
-
 def function_e():
     aut.press("2")
     check_mageitems()  # Check for magecape, occult, and staff when 'e' is pressed
@@ -815,6 +817,9 @@ def function_e():
             
                 aut.press("2") #inv 
                 find_and_click_red_square()
+            else:
+                aut.press("2") #inv 
+                find_and_click_red_square()
                 
 
     if magepray():
@@ -823,6 +828,9 @@ def function_e():
             aut.moveTo(1049, 681, duration=0.01)#fire surge 
             aut.click()
             
+            aut.press("2") #inv 
+            find_and_click_red_square()
+        else:
             aut.press("2") #inv 
             find_and_click_red_square()
             
@@ -920,8 +928,12 @@ def function_f():#entangle
                 
                 aut.press("2") #inv 
                 find_and_click_red_square()
+            else:
+                aut.press("2") #inv 
+                find_and_click_red_square()
 
-    if magepray():
+
+    else:
         aut.press("4") #mage book 
         if not entangle():
             aut.moveTo(1180, 620, duration=0.01)#entangle
@@ -929,7 +941,11 @@ def function_f():#entangle
             
             aut.press("2") #inv 
             find_and_click_red_square()
-        
+        else:
+            aut.press("2") #inv 
+            find_and_click_red_square()
+
+
 def function_t():#tb
     aut.press("2")
     check_mageitems()  # Check for magecape, occult, and staff when 't' is pressed
@@ -947,6 +963,9 @@ def function_t():#tb
                 
                 aut.press("2") #inv 
                 find_and_click_red_square()
+            else:
+                aut.press("2") #inv 
+                find_and_click_red_square()
 
     if magepray():
         aut.press("4") #mage book 
@@ -954,6 +973,9 @@ def function_t():#tb
             aut.moveTo(1146, 650, duration=0.01)#TB
             aut.click()
             
+            aut.press("2") #inv 
+            find_and_click_red_square()
+        else:
             aut.press("2") #inv 
             find_and_click_red_square()
 
