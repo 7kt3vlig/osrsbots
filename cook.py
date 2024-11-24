@@ -44,6 +44,48 @@ def screen1craft():
 
     time.sleep(49)
 
+
+def emeralds():
+
+    aut.moveTo(367, 204)  #banker
+    time.sleep(0.2)
+    aut.click()
+    time.sleep(0.5)
+
+    aut.moveTo(122, 82)  #fletch tabben
+    time.sleep(0.2)
+    aut.click()
+    time.sleep(0.2)
+
+    aut.moveTo(449, 335) #banka allt 
+    time.sleep(0.2)
+    aut.click()
+    time.sleep(0.2)
+
+    aut.moveTo(91, 118) #ta knife 
+    aut.click()
+    time.sleep(0.2)
+
+    aut.moveTo(140, 118) #ta logs  
+    aut.click()
+    time.sleep(0.2)
+    aut.press("esc")
+
+
+    aut.moveTo(583, 260) #knife inventory 
+    time.sleep(0.2)
+    aut.click()
+
+    aut.moveTo(624, 260) #logs  
+    time.sleep(0.2)
+    aut.click()
+    time.sleep(1)
+    aut.press("space")
+    
+
+    time.sleep(34)
+
+
 def herb():
     aut.moveTo(367, 710)  #banker
     time.sleep(0.2)
@@ -271,4 +313,5 @@ def firemake():
 
 for i in range (300):
     # firemake()  
-    screen1craft()
+    # screen1craft()
+    emeralds()

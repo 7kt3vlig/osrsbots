@@ -1,6 +1,6 @@
 import pyautogui as aut
 import time 
-aut.PAUSE = 0.02
+# aut.PAUSE = 0.02
 
 def herb():
     aut.moveTo(369, 204)  #banker
