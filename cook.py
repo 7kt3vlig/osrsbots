@@ -83,7 +83,7 @@ def emeralds():
     aut.press("space")
     
 
-    time.sleep(34)
+    time.sleep(33)
 
 
 def herb():
@@ -306,12 +306,23 @@ def firemake():
     aut.press("space")
     
 
-    time.sleep(65)
+    time.sleep(69)
+    # for i in range (1000):
+    #     aut.moveTo(1320, 155) # runewild 
+    #     time.sleep(0.2)
+    #     aut.click()
+    #     time.sleep(1)
+    #     aut.moveTo(1670, 260) # runewild 
+    #     time.sleep(0.2)
+    #     aut.keyDown("shift")
+    #     aut.click()
+    #     aut.keyUp("shift")
+    #     time.sleep(2.6)
 
 
 
 
 for i in range (300):
-    # firemake()  
+    firemake()  
     # screen1craft()
-    emeralds()
+    # emeralds()

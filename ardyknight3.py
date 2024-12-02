@@ -42,7 +42,7 @@ def refilldodgyneck():
     result = cv.matchTemplate(canny, canny1, cv.TM_CCOEFF_NORMED)
 
         # Define a threshold for the match
-    threshold = 0.53
+    threshold = 0.20
 
     # Get the location of the best match
     _, max_val, _, _ = cv.minMaxLoc(result)
@@ -334,8 +334,6 @@ def banka():
 
 #         refilldodgyneck()
         
-
-
 
 def main():
     start_time = time.time()  # Start the timer

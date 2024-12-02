@@ -23,10 +23,22 @@ while True:
     time.sleep(5)
 
 
-    aut.moveTo(205, 259) # chainbodys 
+    aut.moveTo(366, 97) # chainbodys 
     time.sleep(0.2)
     aut.click()
-    time.sleep(15)
+    # time.sleep(81)
+
+    for i in range (18):
+        aut.moveTo(1320, 155) # runewild 
+        time.sleep(0.2)
+        aut.click()
+        time.sleep(1)
+        aut.moveTo(1670, 260) # runewild 
+        time.sleep(0.2)
+        aut.keyDown("shift")
+        aut.click()
+        aut.keyUp("shift")
+        time.sleep(2.6)
 
 
     aut.moveTo(248, 107) # banken 
