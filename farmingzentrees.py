@@ -184,7 +184,7 @@ def betty():
  
     for i in range (1):
         hittarosa()
-        time.sleep(3)
+        time.sleep(4)
         aut.press("space")
         time.sleep(1) 
         aut.press("2")
@@ -230,10 +230,27 @@ def betty():
 
 def fillcans():
 
-    aut.moveTo(2453, 458)  
+    aut.moveTo(430, 170)  
+    aut.click()
+    time.sleep(0.6)
+
+    aut.press("esc")
+
+    aut.moveTo(585, 260)  
+    aut.click()
+    time.sleep(0.2)
+
+    aut.moveTo(238, 220)  
+    aut.click()
+    time.sleep(50)
+
+    aut.moveTo(309, 201)  
+    aut.click()
+    time.sleep(2)
+
+    aut.moveTo(447, 341)  
+    aut.click()
     time.sleep(1)
-    aut.press("space")
-    time.sleep(0.7)
 
 
 #kamera -159 
@@ -318,14 +335,14 @@ def zentrees():
     time.sleep(3)
 
  
-# -159 seedpod , 330 ny crafting guild 
+# -159 seedpod , 330 ny  crafting guild , betty -71
 while True:
-        
+        # fillcans() 
     zentrees()
 
-#  for i in range (27):
-    
-#      betty()
-     
+    # for i in range (70): 
+        
+    #     betty()
+        
 
  
