@@ -4,6 +4,7 @@ import cv2 as cv
 import time 
 from PIL import ImageGrab, Image 
 import os 
+import random
 
 def slow():
 
@@ -111,7 +112,7 @@ def falador():
 
     aut.moveTo(746, 190)#6
     aut.click()
-    time.sleep(9)
+    time.sleep(10)
 
     aut.moveTo(810, 207)#7
     aut.click()
@@ -129,7 +130,7 @@ def falador():
     aut.click()
     time.sleep(3)
 
-    aut.moveTo(851, 293)#11
+    aut.moveTo(851, 300)#11
     aut.click()
     time.sleep(5)
 
@@ -140,6 +141,130 @@ def falador():
     aut.moveTo(905, 203)#13
     aut.click()
     time.sleep(5)
+
+
+
+
+
+
+
+########################################################################
+def prifdinnas(): # kamera 129 som falador 
+    # 1
+    aut.moveTo(1030, 195)
+    aut.click()
+    time.sleep(random.uniform(8, 11))
+
+    # 2
+    aut.moveTo(870, 250)
+    aut.click()
+    time.sleep(random.uniform(14, 20))
+
+    # 3
+    aut.moveTo(850, 170)
+    aut.click()
+    time.sleep(random.uniform(6, 11))
+
+    # 4
+    aut.moveTo(840, 155)
+    aut.click()
+    time.sleep(random.uniform(5, 11))
+
+    # 5
+    aut.moveTo(840, 185)
+    aut.click()
+    time.sleep(random.uniform(5, 11))
+
+    # 6
+    aut.moveTo(850, 135)
+    aut.click()
+    time.sleep(random.uniform(5, 11))
+
+    # 7
+    aut.moveTo(765, 240)
+    aut.click()
+    time.sleep(random.uniform(9, 11))
+
+    # 8
+    aut.moveTo(790, 200)
+    aut.click()
+    time.sleep(random.uniform(9, 11))
+
+    # 9
+    aut.moveTo(825, 175)
+    aut.click()
+    time.sleep(random.uniform(9, 11))
+
+    # 10
+    aut.moveTo(805, 165)
+    aut.click()
+    time.sleep(random.uniform(9, 11))
+
+    # 11
+    aut.moveTo(880, 175)
+    aut.click()
+    time.sleep(random.uniform(8, 11))
+
+    # 12
+    aut.moveTo(815, 130)
+    aut.click()
+    time.sleep(random.uniform(9, 16))
+
+    # 13 (Väntetid efter sista klicket innan loopen börjar om)
+    time.sleep(random.uniform(1, 10))
+
+
+def prifdinnas2(): #kamera 129 som falador 
+    aut.moveTo(1030, 195) #1
+    aut.click()
+    time.sleep(8)
+
+    aut.moveTo(870, 250)#2
+    aut.click()
+    time.sleep(14)
+
+    aut.moveTo(850, 170)#3
+    aut.click()
+    time.sleep(6)
+
+    aut.moveTo(840, 155)#4
+    aut.click()
+    time.sleep(5)
+
+    aut.moveTo(840, 185)#5
+    aut.click()
+    time.sleep(5)
+
+    aut.moveTo(850, 135)#6
+    aut.click()
+    time.sleep(5)
+
+    aut.moveTo(765, 240)#7
+    aut.click()
+    time.sleep(9)
+
+    aut.moveTo(790,200)#8
+    aut.click()
+    time.sleep(9)
+
+    aut.moveTo(825, 175)#9
+    aut.click()
+    time.sleep(9)
+
+    aut.moveTo(805, 165)#10
+    aut.click()
+    time.sleep(9)
+
+    aut.moveTo(880, 175)#11
+    aut.click()
+    time.sleep(8)
+
+    aut.moveTo(815, 130)#12
+    aut.click()
+    time.sleep(9)
+
+
+
 
 def tabild():
     try:
@@ -170,7 +295,7 @@ def tabild():
             aut.click()
             time.sleep(3)
         elif max_val >= 0.8:
-            aut.moveTo(836, 182)
+            aut.moveTo(836, 184)
             time.sleep(1)
             aut.click()
             time.sleep(3)
@@ -192,7 +317,11 @@ while True:
 '''
 #kamera 102, 129 
 #en runda tar 68-69 sekunder
-for i in range(360):
-    tabild()
-    falador()
-    
+# for i in range(360):
+#     tabild()
+#     falador()
+
+
+while True:
+
+    prifdinnas2()
