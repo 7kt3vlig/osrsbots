@@ -15,10 +15,10 @@ def drop28items():
     aut.moveTo(1505, 404) 
     aut.click()
     time.sleep(0.5)
-    aut.moveTo(1552, 404)  
+    aut.moveTo(1552, 443)  
     aut.keyDown('shift')
     aut.click()
-    for i in range(6):
+    for i in range(5):
         aut.moveRel(0, 35)
         aut.keyDown('shift')  
         aut.click() 

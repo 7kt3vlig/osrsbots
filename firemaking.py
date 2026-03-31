@@ -1,5 +1,6 @@
 import pyautogui as aut
 import time 
+import random
 
 def screen1craft():
     
@@ -241,41 +242,46 @@ def walktobank2():
 
 
 
+
+
+
 def banka():
     
-    aut.moveTo(367, 704)  #banker
-    time.sleep(0.2)
+    aut.moveTo(1428, 310)  #banker
+    time.sleep(1)
     aut.click()
+    time.sleep(1)
+
+    aut.moveTo(1435, 260) #ta logs
     time.sleep(0.5)
-
-    aut.moveTo(122, 596)  #fletch tabben
-    time.sleep(0.2)
     aut.click()
-    time.sleep(0.2)
+    time.sleep(1)
 
-    aut.moveTo(449, 846) #banka allt 
-    time.sleep(0.2)
-    aut.click()
-    time.sleep(0.2)
-
-    aut.moveTo(192, 633) #ta knife 
-    aut.click()
-    time.sleep(0.2)
-
-    aut.moveTo(140, 632) #ta logs  
-    aut.click()
-    time.sleep(0.2)
+     #x'a banken 
     aut.press("esc")
+    time.sleep(0.7)
+
+def bränn():
+
+    aut.moveTo(1127, 404)  #brasan
+    time.sleep(0.2)
+    aut.click()
+    time.sleep(1)
+
+    #bränn logs 
+    aut.press("space")
+    time.sleep(180)
+
+    time.sleep(random.uniform(1, 60))
 
 
 
 
 # walktospot2()
 # firemake()
+
+
 while True:
     
     banka()
-    walktospot2()
-    firemake()
-    walktobank2()
-    
+    bränn()
