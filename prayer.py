@@ -6,6 +6,8 @@ import cv2 as cv
 import time 
 from PIL import ImageGrab, Image 
 import os
+import random
+
 
 roi_top_left = (747, 293)
 roi_bottom_right = (827, 361)
@@ -137,9 +139,25 @@ def bonesinnanphilas():
 #     hittaphilas()
 #     hittaportalen()
 
-for i in range (50):
-        aut.moveTo(1265, 470)
+
+
+
+# #calcified rocks 
+# for i in range(1000):
+#         aut.moveTo(1415, 136)
+#         aut.click()
+#         time.sleep(random.uniform(240,249))
+
+#         # aut.moveTo(1468, 148)
+#         # aut.click()
+#         # time.sleep(random.uniform(120,139,))
+
+
+
+#prayer 
+for i in range (70):
+        aut.moveTo(1860, 475)
         aut.click()
 
-        aut.moveTo(790, 267)
+        aut.moveTo(1386, 199)
         aut.click()

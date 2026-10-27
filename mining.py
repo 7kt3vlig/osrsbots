@@ -150,33 +150,38 @@ def nymining():
     aut.moveTo(710, 475) #4th invent space 
     aut.click()
     
-#kamera 470    494 
+#kamera 470    358 
 def nymining2():
     
 
-    for i in range (7):
-        aut.moveTo(264, 179) #1st rock
+    for i in range (12):
+        aut.moveTo(1404, 232) #1st rock
         aut.click()
-        time.sleep(3.6)
+        time.sleep(1.2)
 
-        aut.moveTo(292, 205) #second rock 
+        aut.moveTo(1379, 199) #second rock 
         aut.click()
-        time.sleep(3.6)
+        time.sleep(1.2)
 
-    aut.moveTo(18, 199) #bank collection booth w.e 
-    aut.click()
-    time.sleep(3)
+        aut.moveTo(1417, 166) #3rd rock 
+        aut.click()
+        time.sleep(1.2)
 
-    aut.moveTo(339, 307) #bank allt
+    time.sleep(1)
+    aut.moveTo(1173, 273) #bank collection booth w.e 
     aut.click()
-    time.sleep(0.2)
-    aut.moveTo(473, 78) #x
-    aut.click()
-    time.sleep(0.2)
+    time.sleep(5)
 
-    aut.moveTo(502, 214) #tbx
+    aut.moveTo(1600, 340) #bank allt
     aut.click()
-    time.sleep(3)
+    time.sleep(1)
+    
+    aut.press("esc")
+    time.sleep(1)
+
+    aut.moveTo(1587, 144) #tbx
+    aut.click()
+    time.sleep(5)
 
     
 

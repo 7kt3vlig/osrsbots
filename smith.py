@@ -4,11 +4,12 @@ import cv2 as cv
 import time 
 import win32 
 import numpy as np
+import random
 
 
 def hittarosa():
 
-    region = (8, 31, 520, 365)  # Define your capture region here
+    region = (1154, 31, 1670, 365)  # Define your capture region here
 
     # Target coordinates (to find the closest shape to these)
     target_x = 636
@@ -217,8 +218,148 @@ def superheat():
 
             aut.moveTo(710, 475) #runite ore
             aut.click()
-            time.sleep(1)
-        
+            time.sleep(1)  
 
 # superheat()
-prif()
+# prif()
+
+#kamera 188 prif 
+# for i in range (100):
+#     aut.moveTo(1251, 354) #runite ore
+#     aut.click()
+#     time.sleep(5)
+
+#     aut.press("space")
+
+#     time.sleep(10)
+
+#     aut.moveTo(1533, 109) #bank
+#     aut.click()
+#     time.sleep(5)
+
+
+#     aut.moveTo(1600, 340) #banka allt
+#     aut.click()
+#     time.sleep(1)
+
+#     aut.moveTo(1240, 161) #ta ore
+#     aut.click()
+#     time.sleep(1)
+
+#     aut.moveTo(1290, 128) #ta ore 
+#     aut.click()
+#     time.sleep(1)
+
+#     aut.press("esc")
+#     time.sleep(0.7)
+
+#dart tips 190 cam
+# for i in range (100):
+#     aut.moveTo(1270, 282, duration=0.2) # anvil
+#     aut.click()
+#     time.sleep(5)
+
+#     aut.moveTo(1500, 100, duration=0.2) # dart
+#     aut.click()
+#     time.sleep(5)
+
+#     time.sleep(random.uniform(85, 115))
+
+#     aut.moveTo(1524, 127, duration=0.2) # banker
+#     aut.click()
+#     time.sleep(5)
+
+
+#     aut.moveTo(1775, 259, duration=0.2) # banka allt
+#     aut.click()
+#     time.sleep(1)
+
+
+#     aut.moveTo(1339, 128, duration=0.2) #ta bars
+#     aut.click()
+#     time.sleep(1)
+
+#     aut.press("esc")
+#     time.sleep(0.7)
+
+# kanonkulor incinidary eller w.e. de heter 
+
+
+# for i in range (100):
+#     aut.moveTo(1515, 225, duration=0.2) # anvil
+#     aut.click()
+#     time.sleep(1)
+#     aut.press("space")
+#     time.sleep(random.uniform(30, 70))
+
+
+# while True:
+        
+#     aut.click()
+#     time.sleep(20)
+
+# #Melee crabs training 
+# # #kamera 566 
+# for i in range (100):
+#     aut.moveTo(1730, 255, duration=0.2) #hosidius i inventory, cape tele. 
+#     aut.click()
+#     aut.moveTo(1415, 200, duration=0.2) # där du står 
+#     aut.click(button="right")
+#     aut.moveRel(0, 25, duration=0.2) #
+#     time.sleep(3)
+#     aut.click()
+#     time.sleep(1)
+#     time.sleep(random.uniform(620, 680))
+
+#pl8body 190 cam
+# for i in range (100):
+#     aut.moveTo(1270, 282, duration=0.2) # anvil
+#     aut.click()
+#     time.sleep(5)
+
+#     aut.moveTo(1345, 260, duration=0.2) # body
+#     aut.click()
+#     time.sleep(5)
+
+#     time.sleep(random.uniform(14, 16))
+
+#     aut.moveTo(1524, 127, duration=0.2) # banker
+#     aut.click()
+#     time.sleep(random.uniform(5, 8))
+
+
+#     aut.moveTo(1775, 259, duration=0.2) # banka allt
+#     aut.click()
+#     time.sleep(1)
+
+
+#     aut.moveTo(1339, 128, duration=0.2) #ta bars
+#     aut.click()
+#     time.sleep(1)
+
+#     aut.press("esc")
+#     time.sleep(0.7)
+
+
+
+#fish chum 
+# while True:
+        
+#     aut.moveTo(1435, 294, duration=0.2) #ta MARLINS
+#     aut.click()
+#     time.sleep(1)
+
+#     aut.press("esc")
+#     time.sleep(0.7)
+
+#     aut.moveTo(1735, 290, duration=0.2) #marlin inv 
+#     aut.click()
+#     time.sleep(1)
+
+#     aut.moveTo(1326, 253, duration=0.2) #chum spreader 
+#     aut.click()
+#     time.sleep(6)
+
+#     aut.moveTo(1511, 193, duration=0.2) #bank
+#     aut.click()
+#     time.sleep(2)

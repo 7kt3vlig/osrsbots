@@ -247,12 +247,17 @@ def walktobank2():
 
 def banka():
     
-    aut.moveTo(1428, 310)  #banker
+    aut.moveTo(1578,208)  #banker
     time.sleep(1)
     aut.click()
     time.sleep(1)
 
-    aut.moveTo(1435, 260) #ta logs
+    aut.moveTo(1733, 299) #banka divine pots
+    time.sleep(0.5)
+    aut.click()
+    time.sleep(1)
+
+    aut.moveTo(1243, 215) #ta pots
     time.sleep(0.5)
     aut.click()
     time.sleep(1)
@@ -263,7 +268,12 @@ def banka():
 
 def bränn():
 
-    aut.moveTo(1127, 404)  #brasan
+    aut.moveTo(1733, 259)  #brasan
+    time.sleep(0.2)
+    aut.click()
+    time.sleep(1)
+
+    aut.moveTo(1733, 299)  #brasan
     time.sleep(0.2)
     aut.click()
     time.sleep(1)
@@ -281,7 +291,7 @@ def bränn():
 # firemake()
 
 
-while True:
+for i in range(19):
     
     banka()
     bränn()

@@ -4,14 +4,14 @@ import numpy as np
 import time
 
 def ingenring():
-    top_left = (318, 274)
-    bottom_right = (388, 342)
+    top_left = (318, 374)
+    bottom_right = (368, 422)
     
     # Debug print to check the region coordinates
     print(f"Top left: {top_left}, Bottom right: {bottom_right}")
     
     # Load the template image in BGR color
-    template = cv.imread("ingenring.png")
+    template = cv.imread("ingenring2.png")
     
     if template is None:
         print("Template image ingenring.png not found or unable to load.")
@@ -48,14 +48,14 @@ def ingenring():
         return False
 
 def gronring():
-    top_left = (318, 274)
-    bottom_right = (388, 342)
+    top_left = (318, 374)
+    bottom_right = (368, 422)
     
     # Debug print to check the region coordinates
     print(f"Top left: {top_left}, Bottom right: {bottom_right}")
     
     # Load the template image in BGR color
-    template = cv.imread("gronring.png")
+    template = cv.imread("gronring1.png")
     
     if template is None:
         print("Template image gronring.png not found or unable to load.")
@@ -90,10 +90,10 @@ def gronring():
         center_y = max_loc[1] + template_height // 2
         click_x = center_x + top_left[0]
         click_y = center_y + top_left[1]
-        aut.moveTo(click_x + 100, click_y + 40)
-        aut.click(click_x + 100, click_y + 40)
+        aut.moveTo(click_x + 100, click_y,duration=0.2 )
+        aut.click(click_x + 100, click_y )
         time.sleep(3)
-        aut.moveTo(1245, 495)
+        aut.moveTo(1245, 495, duration=0.2)
         aut.click()
         time.sleep(1)
         return True
@@ -107,13 +107,13 @@ def click_positions(start_x, start_y, num_rows, num_cols, x_offset, y_offset):
         for j in range(num_rows):
             y = start_y + j * y_offset
             for _ in range(5):
-                aut.moveTo(x, y)
+                aut.moveTo(x, y, duration=0.2)
                 # aut.click()
                 aut.click(button="right")
-                aut.moveTo(x, y + 86)
+                aut.moveTo(x, y + 86, duration=0.2)
                 aut.click()
                 time.sleep(1)
-                aut.moveTo(443, 371)
+                aut.moveTo(443, 371, duration=0.2)
                 aut.click()
                 time.sleep(5)
                 

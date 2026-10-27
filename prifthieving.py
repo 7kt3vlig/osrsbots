@@ -48,6 +48,21 @@ def prif():
 
 
 
+
+count = 0
+
 while True:
+
     prif()
-    time.sleep(0.5)
+    time.sleep(60)
+    aut.click(1816, 331)
+    aut.click(1816, 331)
+    time.sleep(2)
+    # count += 1
+    # if count == 20: # 110 x 0.5 sek = 55 sekunder
+    #     # aut.press('4')
+    #     aut.click(1812, 309) # Dina koordinater
+    #     # time.sleep(0.5)
+    #     # aut.press('2')
+    #     count = 0 # Nollställ 55-sekunders-räknaren
+    # time.sleep(0.5)

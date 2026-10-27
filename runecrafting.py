@@ -756,13 +756,44 @@ def snabb():
     kollavastra()
     tbx()
     
+    
+
+
+def cosmicrunes():
+
+
+    aut.moveTo(1792, 174)#mot shortcut 
+    aut.click()
+    time.sleep(20)
+
+    aut.press("space")
+    time.sleep(5)   
+
+
+
+    aut.moveTo(1795, 155)#mot altaret
+    aut.click()
+    time.sleep(10)
+
+    aut.moveTo(1413, 204)#altaret
+    aut.click()
+    time.sleep(10)
+
+    aut.moveTo(1430, 227)#edge ammy i house
+    aut.click()
+    time.sleep(10)
+
+
+    aut.moveTo(1459, 223)#edge bank
+    aut.click()
+    time.sleep(10)
+
+
+    aut.moveTo(1415, 178)#zanaris i poh
+    aut.click()
+    time.sleep(10)
 
 while True:
-    firerunes()
-    
-
-
-    
-
+     cosmicrunes()
 #nästa -> gör en timer med threading i en miniversion först dock 
     

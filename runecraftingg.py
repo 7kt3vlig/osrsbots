@@ -552,8 +552,8 @@ def senaste():
         if lava_laps % 9 == 0:
             nyneck()
 
-        # Call npccontact every 10 laps
-        if lava_laps % 10 == 0:
-            npccontact()
+        # # Call npccontact every 10 laps
+        # if lava_laps % 10 == 0:
+        #     npccontact()
 
 senaste()
