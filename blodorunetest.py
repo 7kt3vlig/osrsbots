@@ -63,7 +63,7 @@ def minepink():
         time.sleep(10)
         aut.moveTo(1273,176)
         aut.click()
-        time.sleep(20)
+        time.sleep(22)
         return True
 
     except Exception as e:
