@@ -13,6 +13,7 @@ import time
 # PINK SHAPE DETECTION (ONE SCAN)
 # -----------------------------
 
+
 def minepink():
     top_left = (1399, 120)
     bottom_right = (1420, 150)
@@ -60,10 +61,9 @@ def minepink():
         print(f"Pink shape found at ({click_x}, {click_y})")
         aut.click(click_x, click_y)
         aut.click(click_x, click_y)
-        time.sleep(10)
+        time.sleep(15)
         aut.moveTo(1273,176)
         aut.click()
-        time.sleep(22)
         return True
 
     except Exception as e:
@@ -118,7 +118,7 @@ def minepink2():
         print(f"Pink shape 2 found at ({click_x}, {click_y})")
         aut.click(click_x, click_y)
         aut.click(click_x, click_y)
-        time.sleep(20)
+        time.sleep(18)
         aut.moveTo(1458, 212)
         aut.click()
         return True
@@ -211,7 +211,7 @@ def check_mining_status():
 
 def mineessence():
     top_left = (1313, 104)
-    bottom_right = (1580, 311)
+    bottom_right = (1490, 311)
 
     try:
         screenshot = aut.screenshot(
@@ -317,6 +317,9 @@ def check_full_inventory():
         print(f"Full inventory detection error: {e}")
         return False
 
+
+
+
 # -----------------------------
 # BACKGROUND TASK CONTROL
 # -----------------------------
@@ -364,7 +367,7 @@ def mining_monitor():
             print("Unable to determine status.")
 
         # Wait 5 seconds, checking for a stop request
-        for _ in range(50):
+        for _ in range(40):
             if not monitor_running.is_set():
                 break
             time.sleep(0.1)
@@ -385,7 +388,20 @@ def toggle_monitor():
 def run_pink_finder():
     # One scan for each button press
     threading.Thread(target=minepink, daemon=True).start()
+# -----------------------------
+# TO BLOOD ALTAR
+# -----------------------------
 
+def to_blood_altar():
+    aut.moveTo(1793, 163)  # mot bloodaltar
+    aut.click()
+    time.sleep(40)
+
+    aut.moveTo(1806, 169)  # mot bloodaltar
+    aut.click()
+    time.sleep(40)
+
+    print("Blood altar sequence finished.")
 
 # -----------------------------
 # GUI
@@ -428,6 +444,19 @@ pink_button = tk.Button(
 )
 pink_button.pack(pady=5)
 
+
+blood_altar_button = tk.Button(
+    root,
+    text="To Blood Altar",
+    width=25,
+    height=2,
+    command=lambda: threading.Thread(
+        target=to_blood_altar,
+        daemon=True
+    ).start()
+)
+blood_altar_button.pack(pady=5)
+
 pink_button2 = tk.Button(
     root,
     text="Find Pink Shape 2",
@@ -439,7 +468,6 @@ pink_button2 = tk.Button(
     ).start()
 )
 pink_button2.pack(pady=5)
-
 
 def close_app():
     monitor_running.clear()
